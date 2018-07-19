@@ -9,6 +9,23 @@
 - <a href="https://habrahabr.ru/post/277669/"> Справочник по синхронизаторам java.util.concurrent.*</a>
 - <a href="http://articles.javatalks.ru/articles/17">Использование ThreadLocal переменных</a>
 
+>  Замечания по видео:
+
+    ThreadLocal<SimpleDateFormat> DATE_FORMAT = new ThreadLocal<SimpleDateFormat>() {
+       @Override
+       protected SimpleDateFormat initialValue() {
+            return new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+       };
+    };
+
+можно написать через лямбду: 
+
+    ThreadLocal.withInitial(() -> new SimpleDateFormat("dd.MM.yyyy HH:mm:ss"));
+    
+А лучше использовать потокобезопасный `DateTimeFormatter` Java 8 Time API: 
+
+    DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+
 ## Разбор домашнего задания 10го урока
 
 ## Домашнее задание:
