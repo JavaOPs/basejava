@@ -20,7 +20,9 @@
 - [Bash — шпаргалка для начинающих](https://tproger.ru/translations/bash-cheatsheet)
 - [Интерактивный курс по SQL](http://www.sql-ex.ru/)
 - [Типичный тест SQL на собеседованиях](https://habrahabr.ru/post/181033/)
-- **Обновление!!**[Что и почему используют Java-разработчики: опрос RebelLabs](https://jug.ru/2017/12/rebellabs-report/)
+- **Обновление!!*
+  - [The State of Java in 2018](http://www.baeldung.com/java-in-2018)
+  - [Что и почему используют Java-разработчики: опрос RebelLabs](https://jug.ru/2017/12/rebellabs-report/)
   - [Java Tools and Technologies Landscape Report 2016](https://zeroturnaround.com/rebellabs/java-tools-and-technologies-landscape-2016/)
   - [Java Tools and Technologies Landscape for 2014](http://zeroturnaround.com/rebellabs/java-tools-and-technologies-landscape-for-2014)
 - **Дополнительно:**
