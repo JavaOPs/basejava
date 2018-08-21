@@ -1,7 +1,6 @@
 # Первое занятие
 
 ## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) [Вебинар-презентация обучения на проекте BaseJava](https://drive.google.com/file/d/0B_4NpoQW1xfpNzdqT2hOcUJ6TGs)
-#### [Итоговый пример приложения, разрабатываемого в рамках данного курса (на примере резюме Григория Кислина)](https://javawebinar.github.io/)
 
 ### Подготовка рабочего окружения
 - Установите [JDK8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) (выбрать Accept License Agreement)
@@ -116,3 +115,6 @@ r1, r2, r3,..., rn, null, null,..., null
 6. `Resume r` — давай переменным осмысленные имена, например `resume`. `r` допустимо в коротких циклах и лямбдах.
 7. В методе `clear()` обнуление массива предполагает именно обнуление (null), а не создание нового
 8. По заданию необходимо посмотреть в классе `Arrays методы`, которые помогут упростить реализацию ваших методов `clear()` и `getAll()`
+
+## Дополнительно (подход к обучению, мышлению, решению проблем):
+### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) [Вебинар "Быть программистом: от детства к зрелости"](http://javaops.ru/view/resources/tobe-programmer)
