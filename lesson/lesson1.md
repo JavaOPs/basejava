@@ -116,5 +116,7 @@ r1, r2, r3,..., rn, null, null,..., null
 7. В методе `clear()` обнуление массива предполагает именно обнуление (null), а не создание нового
 8. По заданию необходимо посмотреть в классе `Arrays методы`, которые помогут упростить реализацию ваших методов `clear()` и `getAll()`
 
-# Дополнительно (подход к обучению, мышлению, решению проблем):
-## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 4. [Вебинар "Быть программистом: от детства к зрелости"](http://javaops.ru/view/resources/tobe-programmer)
+# Дополнительно (подход к обучению, мышлению, решению проблем)
+## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png)  5. [Вебинар "Быть программистом: от детства к зрелости"](https://www.youtube.com/watch?v=D5Hej0TyLaU)
+  - [Слайды вебинара](https://docs.google.com/presentation/d/1YwtCCZsaGMdl-V15kTDHiJxiS52IAl-qqheNPpiNr54/)
+
