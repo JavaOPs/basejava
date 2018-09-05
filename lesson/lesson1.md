@@ -1,6 +1,6 @@
 # Первое занятие
 
-## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) [Вебинар-презентация обучения на проекте BaseJava](https://drive.google.com/file/d/0B_4NpoQW1xfpNzdqT2hOcUJ6TGs)
+## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) [Видеообзор проекта Basejava](https://www.youtube.com/watch?v=0ydTRfKS9yY)
 
 ### Подготовка рабочего окружения
 - Установите [JDK8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) (выбрать Accept License Agreement)
@@ -87,7 +87,6 @@ r1, r2, r3,..., rn, null, null,..., null
 <----- size ----->
 <------- storage.length (10000) ------->
 ```
-- Посмотрите на класс `java.util.Arrays`. В нем есть полезные методы, которые помогут вам написать более простой и понятный код
 - Протестируйте вашу реализацию с помощью классов `MainArray.main()` и `MainTestArrayStorage.main()`
 - Изучите дополнительные материалы по IntelliJ IDEA:
   - [Idea Wiki](https://github.com/JavaOPs/topjava/wiki/IDEA) ([поставьте кодировку UTF-8](https://github.com/JavaOPs/topjava/wiki/IDEA#Поставить-кодировку-utf-8), [поменяйте шрифт по умолчанию на DejaVu](https://github.com/JavaOPs/topjava/wiki/IDEA#Поменять-фонт-по-умолчанию-dejavu))
@@ -114,7 +113,6 @@ r1, r2, r3,..., rn, null, null,..., null
 5. Не игнорируй подсказки IDEA (подсвечивает)
 6. `Resume r` — давай переменным осмысленные имена, например `resume`. `r` допустимо в коротких циклах и лямбдах.
 7. В методе `clear()` обнуление массива предполагает именно обнуление (null), а не создание нового
-8. По заданию необходимо посмотреть в классе `Arrays методы`, которые помогут упростить реализацию ваших методов `clear()` и `getAll()`
 
 # Дополнительно (как учиться программированию)
 ## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png)  5. [Вебинар "Быть программистом: от детства к зрелости"](https://www.youtube.com/watch?v=D5Hej0TyLaU)
