@@ -17,15 +17,13 @@
 
 ## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 2. [Обзор инструментов и технологий](https://drive.google.com/file/d/0B_4NpoQW1xfpTXJYU2xZbjN2d2M)
 - [Bash — шпаргалка для начинающих](https://tproger.ru/translations/bash-cheatsheet)
-- [Интерактивный курс по SQL](http://www.sql-ex.ru/)
-- [Типичный тест SQL на собеседованиях](https://habrahabr.ru/post/181033/)
 - **Обновление!!*
   - [The State of Java in 2018](http://www.baeldung.com/java-in-2018)
   - [Что и почему используют Java-разработчики: опрос RebelLabs](https://jug.ru/2017/12/rebellabs-report/)
   - [Java Tools and Technologies Landscape Report 2016](https://zeroturnaround.com/rebellabs/java-tools-and-technologies-landscape-2016/)
   - [Java Tools and Technologies Landscape for 2014](http://zeroturnaround.com/rebellabs/java-tools-and-technologies-landscape-for-2014)
 - **Дополнительно:**
-   - [Автоматизированная сборка проекта в Java](http://spring-projects.ru/guides/maven/)
+  - [Типичный тест SQL на собеседованиях](https://habrahabr.ru/post/181033/)
 
 ## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 3. [Обзор языка Java](https://drive.google.com/open?id=0B_4NpoQW1xfpTU5SSElhUjlGNnc)
 - [Java](http://ru.wikipedia.org/wiki/Java), [JVM](http://ru.wikipedia.org/wiki/Виртуальная_машина_Java), [JIT-компиляция](http://ru.wikipedia.org/wiki/JIT) (wiki)
