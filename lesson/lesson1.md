@@ -54,6 +54,7 @@
   - [Working with remote repositories](https://illustrated-git.readthedocs.org/en/latest/#working-with-remote-repositories)
   - [Базовый курс по обучению Git](https://www.youtube.com/playlist?list=PLIU76b8Cjem5B3sufBJ_KFTpKkMEvaTQR) (youtube)
   - [Git. Быстрый старт](https://www.youtube.com/watch?v=4-NX17Ip-xQ&list=PLmRNNqEA7JoM77hOJkPrLOfJQGizCLR3P) (youtube)
+  - [Подробное введение в работу с Git](https://tproger.ru/translations/beginner-git-cheatsheet/)
   
 ### Настройка проекта
 - Создайте на GitHub репозиторий с названием `basejava`
