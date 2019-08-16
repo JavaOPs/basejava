@@ -202,6 +202,7 @@
 - <a href="http://www.bookvoed.ru/book?id=639284">Редмонд Э.: Семь баз данных за семь недель. Введение в современные базы данных и идеологию NoSQL.</a>
 
 ##  Ресуры в сети
+- [EduTools плагин от JetBrains для изучения Kotlin, Java, Python, Scala, ...](http://javaops.ru/view/story/story21#edutools)
 - [Руководство по Java Core](http://proselyte.net/tutorials/java-core/)
 - [Java. Базовый курс](https://stepik.org/course/Java-Базовый-курс-187)
 - <a href="http://www.intuit.ru/studies/courses/16/16/info">intuit: Программирование на Java</a>
