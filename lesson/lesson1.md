@@ -6,12 +6,12 @@
 - Установите [JDK8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) (выбрать Accept License Agreement)
 - Установите систему управления версиями [Git](http://git-scm.com/downloads) (опции по умолчанию)
 - Создайте аккаунт на [GitHub](https://github.com/). Для удобной навигации по файлам на GitHub можно установить расширение для браузера [Octotree](https://habrahabr.ru/post/223527/)
-- Установите [IntelliJ IDEA](http://www.jetbrains.com/idea/download/index.html). **Пока нет базы данных и веб, можно работать с версией Community**. На версию Ultimate дается 30 дней пробного бесплатного использования (trial).  На проектах каждый участник проектов получает единоразовый личный купон на бесплатную версию Ultimate на 6 месяцев.
+- Установите [IntelliJ IDEA](http://www.jetbrains.com/idea/download/index.html). **Пока нет базы данных и веб, можно работать с версией Community**. На версию Ultimate дается 30 дней пробного бесплатного использования (trial). На проектах каждый участник получает единоразовый личный купон на бесплатную версию Ultimate на 6 месяцев
 
 ## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 1. [Разработка ПО](https://drive.google.com/open?id=0B_4NpoQW1xfpVjZUTEpvVUN1TTA)
 - [Мифический человеко-месяц](https://ru.wikipedia.org/wiki/Мифический_человеко-месяц) (wiki)
 - [Размеры проектов в количестве строк кода [eng]](https://www.freecodecamp.org/news/the-biggest-codebases-in-history-a128bb3eea73)
-- [Соглашения по оформлению кода [eng]](https://google.github.io/styleguide/javaguide.html)
+- [Руководство Google по форматированию кода на Java](https://topjava.ru/blog/google-java-style-guide)
 - [Методологии разработки ПО](https://dou.ua/forums/topic/14015/)
 - [Ещё раз про семь основных методологий разработки](https://habrahabr.ru/company/edison/blog/269789/)
 
