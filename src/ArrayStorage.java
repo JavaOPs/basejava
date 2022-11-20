@@ -1,10 +1,12 @@
+import java.util.Arrays;
+
 /**
  * Array based storage for Resumes
  */
 public class ArrayStorage {
 
   Resume[] storage = new Resume[10000];
-  private int storageSize = 0;
+  private int storageSize;
 
   void clear() {
     for (int i = 0; i < storageSize; i++) {
@@ -27,18 +29,13 @@ public class ArrayStorage {
   }
 
   void delete(String uuid) {
-    int deletedIndex = -1;
     for (int i = 0; i < storageSize; i++) {
       if (uuid.equals(storage[i].uuid)) {
-        deletedIndex = i;
+        storage[i] = storage[storageSize - 1];
+        storage[storageSize - 1] = null;
+        storageSize--;
         break;
       }
-    }
-    if (deletedIndex >= 0) {
-      for (int i = deletedIndex; i < storageSize - 1; i++) {
-        storage[i] = storage[i + 1];
-      }
-      storageSize -= 1;
     }
   }
 
@@ -46,11 +43,7 @@ public class ArrayStorage {
    * @return array, contains only Resumes in storage (without null)
    */
   Resume[] getAll() {
-    Resume[] onlyWithData = new Resume[storageSize];
-    for (int i = 0; i < storageSize; i++) {
-      onlyWithData[i] = storage[i];
-    }
-    return onlyWithData;
+    return Arrays.copyOf(storage, storageSize);
   }
 
   int size() {
