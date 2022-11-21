@@ -12,9 +12,7 @@ public class ArrayStorage {
   private int storageSize;
 
   public void clear() {
-    for (int i = 0; i < storageSize; i++) {
-      storage[i] = null;
-    }
+    Arrays.fill(storage,0, storageSize, null);
     storageSize = 0;
   }
 
@@ -28,6 +26,10 @@ public class ArrayStorage {
   }
 
   public void save(Resume r) {
+    if (storageSize == storage.length) {
+      System.out.println("Storage is full!");
+      return;
+    }
     int index = getPresentResumeIndex(r.getUuid());
     if (index == -1) {
       storage[storageSize++] = r;
