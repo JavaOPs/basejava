@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class ArrayStorage extends AbstractArrayStorage {
 
   public void clear() {
-    Arrays.fill(storage,0, storageSize, null);
+    Arrays.fill(storage, 0, storageSize, null);
     storageSize = 0;
   }
 
@@ -33,16 +33,6 @@ public class ArrayStorage extends AbstractArrayStorage {
       storageSize++;
     } else {
       System.out.println("Resume " + r.getUuid() + " is already exists!");
-    }
-  }
-
-  public Resume get(String uuid) {
-    int index = getIndex(uuid);
-    if (index >= 0) {
-      return storage[index];
-    } else {
-      System.out.println("Resume " + uuid + " isn't exists!");
-      return null;
     }
   }
 
