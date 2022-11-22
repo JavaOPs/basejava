@@ -1,17 +1,15 @@
-package com.urise.webapp.storage;
+package ru.javawebinar.basejava.storage;
 
-import com.urise.webapp.model.Resume;
 import java.util.Arrays;
+import ru.javawebinar.basejava.model.Resume;
 
-/**
- * Array based storage for Resumes
- */
-public class ArrayStorage extends AbstractArrayStorage {
+public abstract class AbstractArrayStorage implements Storage {
 
-  public void clear() {
-    Arrays.fill(storage, 0, storageSize, null);
-    storageSize = 0;
-  }
+  protected static final int STORAGE_LIMIT = 10000;
+  protected Resume[] storage = new Resume[STORAGE_LIMIT];
+  protected int storageSize;
+
+  protected abstract int getIndex(String uuid);
 
   public void update(Resume r) {
     int index = getIndex(r.getUuid());
@@ -22,13 +20,17 @@ public class ArrayStorage extends AbstractArrayStorage {
     }
   }
 
+  public int size() {
+    return storageSize;
+  }
+
   public void save(Resume r) {
     if (storageSize >= STORAGE_LIMIT) {
       System.out.println("Storage is full!");
       return;
     }
     int index = getIndex(r.getUuid());
-    if (index == -1) {
+    if (index < 0) {
       storage[storageSize] = r;
       storageSize++;
     } else {
@@ -47,6 +49,16 @@ public class ArrayStorage extends AbstractArrayStorage {
     }
   }
 
+  public final Resume get(String uuid) {
+    int index = getIndex(uuid);
+    if (index >= 0) {
+      return storage[index];
+    } else {
+      System.out.println("Resume " + uuid + " isn't exists!");
+      return null;
+    }
+  }
+
   /**
    * @return array, contains only Resumes in storage (without null)
    */
@@ -54,12 +66,8 @@ public class ArrayStorage extends AbstractArrayStorage {
     return Arrays.copyOf(storage, storageSize);
   }
 
-  protected int getIndex(String uuid) {
-    for (int i = 0; i < storageSize; i++) {
-      if (uuid.equals(storage[i].getUuid())) {
-        return i;
-      }
-    }
-    return -1;
+  public void clear() {
+    Arrays.fill(storage, 0, storageSize, null);
+    storageSize = 0;
   }
 }
