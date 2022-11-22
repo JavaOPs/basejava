@@ -8,7 +8,8 @@ import java.util.Arrays;
  */
 public class ArrayStorage {
 
-  private Resume[] storage = new Resume[10000];
+  private static final int STORAGE_LIMIT = 10000;
+  private Resume[] storage = new Resume[STORAGE_LIMIT];
   private int storageSize;
 
   public void clear() {
@@ -17,43 +18,46 @@ public class ArrayStorage {
   }
 
   public void update(Resume r) {
-    int index = getPresentResumeIndex(r.getUuid());
+    int index = getIndex(r.getUuid());
     if (index >= 0) {
       storage[index] = r;
     } else {
-      System.out.println("There are not resume with this uuid!");
+      System.out.println("Resume " + r.getUuid() + " isn't exists!");
     }
   }
 
   public void save(Resume r) {
-    if (storageSize == storage.length) {
+    if (storageSize >= STORAGE_LIMIT) {
       System.out.println("Storage is full!");
       return;
     }
-    int index = getPresentResumeIndex(r.getUuid());
+    int index = getIndex(r.getUuid());
     if (index == -1) {
-      storage[storageSize++] = r;
+      storage[storageSize] = r;
+      storageSize++;
     } else {
-      System.out.println("This resume already exists!");
+      System.out.println("Resume " + r.getUuid() + " is already exists!");
     }
   }
 
   public Resume get(String uuid) {
-    int index = getPresentResumeIndex(uuid);
+    int index = getIndex(uuid);
     if (index >= 0) {
       return storage[index];
+    } else {
+      System.out.println("Resume " + uuid + " isn't exists!");
+      return null;
     }
-    return null;
   }
 
   public void delete(String uuid) {
-    int index = getPresentResumeIndex(uuid);
+    int index = getIndex(uuid);
     if (index >= 0) {
       storageSize--;
       storage[index] = storage[storageSize];
       storage[storageSize] = null;
     } else {
-      System.out.println("There are not resume with this uuid!");
+      System.out.println("Resume " + uuid + " isn't exists!");
     }
   }
 
@@ -68,7 +72,7 @@ public class ArrayStorage {
     return storageSize;
   }
 
-  private int getPresentResumeIndex(String uuid) {
+  private int getIndex(String uuid) {
     for (int i = 0; i < storageSize; i++) {
       if (uuid.equals(storage[i].getUuid())) {
         return i;
