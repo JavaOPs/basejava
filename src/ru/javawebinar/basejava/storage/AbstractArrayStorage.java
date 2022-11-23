@@ -11,6 +11,10 @@ public abstract class AbstractArrayStorage implements Storage {
 
   protected abstract int getIndex(String uuid);
 
+  protected abstract void insertElement(Resume r, int index);
+
+  protected abstract void fillDeletedElement(int index);
+
   public void update(Resume r) {
     int index = getIndex(r.getUuid());
     if (index >= 0) {
@@ -31,7 +35,7 @@ public abstract class AbstractArrayStorage implements Storage {
     }
     int index = getIndex(r.getUuid());
     if (index < 0) {
-      storage[storageSize] = r;
+      insertElement(r, index);
       storageSize++;
     } else {
       System.out.println("Resume " + r.getUuid() + " is already exists!");
@@ -42,7 +46,7 @@ public abstract class AbstractArrayStorage implements Storage {
     int index = getIndex(uuid);
     if (index >= 0) {
       storageSize--;
-      storage[index] = storage[storageSize];
+      fillDeletedElement(index);
       storage[storageSize] = null;
     } else {
       System.out.println("Resume " + uuid + " isn't exists!");
