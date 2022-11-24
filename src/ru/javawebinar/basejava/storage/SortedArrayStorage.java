@@ -7,8 +7,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
   @Override
   protected int getIndex(String uuid) {
-    Resume searchKey = new Resume();
-    searchKey.setUuid(uuid);
+    Resume searchKey = new Resume(uuid);
     return Arrays.binarySearch(storage, 0, storageSize, searchKey);
   }
 
@@ -21,7 +20,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
   @Override
   protected void fillDeletedElement(int index) {
-    int numMoved = storageSize - index;
+    int numMoved = storageSize - 1 - index;
     if (numMoved >= 0) {
       System.arraycopy(storage, index + 1, storage, index, numMoved);
     }
