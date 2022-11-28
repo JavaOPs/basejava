@@ -6,28 +6,19 @@ import ru.javawebinar.basejava.exception.ExistStorageException;
 import ru.javawebinar.basejava.exception.NotExistStorageException;
 import ru.javawebinar.basejava.model.Resume;
 
-public class ListStorage implements Storage {
+public class ListStorage extends AbstractStorage {
 
-  List<Resume> storage = new ArrayList<>();
+  private final List<Resume> storage = new ArrayList<>();
 
   @Override
-  public void clear() {
-    storage.clear();
+  protected boolean isExist(Object searchKey) {
+    return (Integer) searchKey >= 0;
   }
 
   @Override
-  public void update(Resume r) {
-    int index = getIndex(r.getUuid());
-    if(index >= 0) {
-      storage.add(index, r);
-    } else {
-      throw new NotExistStorageException(r.getUuid());
-    }
-  }
-
-  private int getIndex(String uuid) {
+  protected Integer getSearchKey(String uuid) {
     for (int i = 0; i < storage.size(); i++) {
-      if(storage.get(i).getUuid().equals(uuid)) {
+      if (storage.get(i).getUuid().equals(uuid)) {
         return i;
       }
     }
@@ -35,31 +26,28 @@ public class ListStorage implements Storage {
   }
 
   @Override
-  public void save(Resume r) {
-    int index = getIndex(r.getUuid());
-    if(index >= 0) {
-      throw new ExistStorageException(r.getUuid());
-    } else {
-      storage.add(r);
-    }
+  public void clear() {
+    storage.clear();
   }
 
   @Override
-  public Resume get(String uuid) {
-    int index = getIndex(uuid);
-    if(index >= 0) {
-      return storage.get(index);
-    } else {
-      throw new NotExistStorageException(uuid);
-    }
+  public void doUpdate(Resume r, Object index) {
+    storage.set((Integer) index, r);
   }
 
   @Override
-  public void delete(String uuid) {
-    boolean isDeleted = storage.remove(new Resume(uuid));
-    if(!isDeleted) {
-      throw new NotExistStorageException(uuid);
-    }
+  public void doSave(Resume r, Object index) {
+    storage.add((Integer) index, r);
+  }
+
+  @Override
+  public Resume doGet(Object index) {
+    return storage.get((Integer) index);
+  }
+
+  @Override
+  public void doDelete(Object index) {
+    storage.remove(((Integer) index).intValue());
   }
 
   @Override
