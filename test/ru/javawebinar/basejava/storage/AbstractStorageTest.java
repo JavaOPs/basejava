@@ -11,7 +11,7 @@ import ru.javawebinar.basejava.model.Resume;
 
 public abstract class AbstractStorageTest {
 
-  private final Storage storage;
+  protected final Storage storage;
 
   protected AbstractStorageTest(Storage storage) {
     this.storage = storage;
@@ -63,19 +63,6 @@ public abstract class AbstractStorageTest {
   public void saveExist() {
     Assertions.assertThrows(ExistStorageException.class,
         () -> storage.save(RESUME_1));
-  }
-
-  @Test
-  public void saveOverflow() {
-    try {
-      for (int i = 4; i <= AbstractArrayStorage.STORAGE_LIMIT; i++) {
-        storage.save(new Resume());
-      }
-    } catch (StorageException e) {
-      Assertions.fail("Overflow was too early");
-    }
-    Assertions.assertThrows(StorageException.class,
-        () -> storage.save(new Resume()));
   }
 
   @Test
