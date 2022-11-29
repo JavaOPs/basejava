@@ -43,6 +43,7 @@ public abstract class AbstractStorage implements Storage {
     if (isExist(searchKey)) {
       throw new ExistStorageException(uuid);
     }
+    // TODO: Возвращать ключ в рамках которого можно положить следующую запись
     return searchKey;
   }
 

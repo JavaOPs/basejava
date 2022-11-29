@@ -1,8 +1,9 @@
 package ru.javawebinar.basejava.storage;
 
+
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import ru.javawebinar.basejava.exception.ExistStorageException;
 import ru.javawebinar.basejava.exception.NotExistStorageException;
 import ru.javawebinar.basejava.exception.StorageException;
@@ -62,6 +63,19 @@ public abstract class AbstractStorageTest {
   public void saveExist() {
     Assertions.assertThrows(ExistStorageException.class,
         () -> storage.save(RESUME_1));
+  }
+
+  @Test
+  public void saveOverflow() {
+    try {
+      for (int i = 4; i <= AbstractArrayStorage.STORAGE_LIMIT; i++) {
+        storage.save(new Resume());
+      }
+    } catch (StorageException e) {
+      Assertions.fail("Overflow was too early");
+    }
+    Assertions.assertThrows(StorageException.class,
+        () -> storage.save(new Resume()));
   }
 
   @Test
