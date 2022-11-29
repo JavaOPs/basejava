@@ -2,6 +2,7 @@ package ru.javawebinar.basejava.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import ru.javawebinar.basejava.exception.ExistStorageException;
 import ru.javawebinar.basejava.exception.NotExistStorageException;
 import ru.javawebinar.basejava.model.Resume;
@@ -37,7 +38,7 @@ public class ListStorage extends AbstractStorage {
 
   @Override
   public void doSave(Resume r, Object index) {
-    storage.add((Integer) index, r);
+    storage.add(r);
   }
 
   @Override

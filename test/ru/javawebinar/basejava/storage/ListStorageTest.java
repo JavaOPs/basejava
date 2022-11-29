@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import ru.javawebinar.basejava.model.Resume;
 
-public class ListStorageTest extends AbstractArrayStorageTest {
+public class ListStorageTest extends AbstractStorageTest {
 
   protected ListStorageTest() {
     super(new ListStorage());
