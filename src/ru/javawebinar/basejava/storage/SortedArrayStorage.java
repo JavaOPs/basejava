@@ -1,14 +1,17 @@
 package ru.javawebinar.basejava.storage;
 
+import java.util.Comparator;
 import ru.javawebinar.basejava.model.Resume;
 import java.util.Arrays;
 
 public class SortedArrayStorage extends AbstractArrayStorage {
 
+  private static final Comparator<Resume> RESUME_COMPARATOR = (o1, o2) -> o1.getUuid().compareTo(o2.getUuid());
+
   @Override
   protected Integer getSearchKey(String uuid) {
-    Resume searchKey = new Resume(uuid);
-    return Arrays.binarySearch(storage, 0, storageSize, searchKey);
+    Resume searchKey = new Resume(uuid, "dummy");
+    return Arrays.binarySearch(storage, 0, storageSize, searchKey, RESUME_COMPARATOR);
   }
 
   @Override
