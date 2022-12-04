@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import ru.javawebinar.basejava.model.Resume;
 
-public class ListStorage extends AbstractStorage {
+public class ListStorage extends AbstractStorage<Integer> {
 
   private final List<Resume> storage = new ArrayList<>();
 
   @Override
-  protected boolean isExist(Object searchKey) {
-    return (Integer) searchKey >= 0;
+  protected boolean isExist(Integer searchKey) {
+    return searchKey >= 0;
   }
 
   @Override
@@ -29,23 +29,23 @@ public class ListStorage extends AbstractStorage {
   }
 
   @Override
-  public void doUpdate(Resume r, Object index) {
-    storage.set((Integer) index, r);
+  public void doUpdate(Resume r, Integer index) {
+    storage.set(index, r);
   }
 
   @Override
-  public void doSave(Resume r, Object index) {
+  public void doSave(Resume r, Integer index) {
     storage.add(r);
   }
 
   @Override
-  public Resume doGet(Object index) {
-    return storage.get((Integer) index);
+  public Resume doGet(Integer index) {
+    return storage.get(index);
   }
 
   @Override
-  public void doDelete(Object index) {
-    storage.remove(((Integer) index).intValue());
+  public void doDelete(Integer index) {
+    storage.remove(index.intValue());
   }
 
   @Override
