@@ -1,5 +1,6 @@
 package ru.javawebinar.basejava.storage;
 
+import java.util.List;
 import ru.javawebinar.basejava.model.Resume;
 
 public interface Storage {
@@ -17,7 +18,7 @@ public interface Storage {
   /**
    * @return array, contains only Resumes in storage (without null)
    */
-  Resume[] getAll();
+  List<Resume> getAllSorted();
 
   int size();
 }

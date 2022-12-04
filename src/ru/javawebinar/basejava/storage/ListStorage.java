@@ -2,9 +2,6 @@ package ru.javawebinar.basejava.storage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import ru.javawebinar.basejava.exception.ExistStorageException;
-import ru.javawebinar.basejava.exception.NotExistStorageException;
 import ru.javawebinar.basejava.model.Resume;
 
 public class ListStorage extends AbstractStorage {
@@ -52,8 +49,8 @@ public class ListStorage extends AbstractStorage {
   }
 
   @Override
-  public Resume[] getAll() {
-    return storage.toArray(new Resume[storage.size()]);
+  public List<Resume> doCopyAll() {
+    return new ArrayList<>(storage);
   }
 
   @Override
