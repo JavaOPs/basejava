@@ -1,8 +1,7 @@
 package ru.javawebinar.basejava.storage;
 
 import java.util.Arrays;
-import ru.javawebinar.basejava.exception.ExistStorageException;
-import ru.javawebinar.basejava.exception.NotExistStorageException;
+import java.util.List;
 import ru.javawebinar.basejava.exception.StorageException;
 import ru.javawebinar.basejava.model.Resume;
 
@@ -57,8 +56,9 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
   /**
    * @return array, contains only Resumes in storage (without null)
    */
-  public Resume[] getAll() {
-    return Arrays.copyOf(storage, storageSize);
+  @Override
+  public List<Resume> doCopyAll() {
+    return Arrays.asList(Arrays.copyOf(storage, storageSize));
   }
 
   public void clear() {

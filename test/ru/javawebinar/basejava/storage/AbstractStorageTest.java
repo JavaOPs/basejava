@@ -1,6 +1,8 @@
 package ru.javawebinar.basejava.storage;
 
 
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -92,12 +94,10 @@ public abstract class AbstractStorageTest {
   }
 
   @Test
-  public void getAll() throws Exception {
-    Resume[] testStorage = storage.getAll();
-    Assertions.assertEquals(3, testStorage.length);
-    Assertions.assertEquals(RESUME_1, testStorage[0]);
-    Assertions.assertEquals(RESUME_2, testStorage[1]);
-    Assertions.assertEquals(RESUME_3, testStorage[2]);
+  public void getAllSorted() throws Exception {
+    List<Resume> testStorage = storage.getAllSorted();
+    Assertions.assertEquals(3, testStorage.size());
+    Assertions.assertEquals(testStorage, Arrays.asList(RESUME_1, RESUME_2,RESUME_3));
   }
 
   @Test

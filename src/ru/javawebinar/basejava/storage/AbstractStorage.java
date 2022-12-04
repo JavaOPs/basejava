@@ -1,5 +1,7 @@
 package ru.javawebinar.basejava.storage;
 
+import java.util.Collections;
+import java.util.List;
 import ru.javawebinar.basejava.exception.ExistStorageException;
 import ru.javawebinar.basejava.exception.NotExistStorageException;
 import ru.javawebinar.basejava.model.Resume;
@@ -17,6 +19,8 @@ public abstract class AbstractStorage implements Storage {
   protected abstract void doDelete(Object searchKey);
 
   protected abstract Resume doGet(Object searchKey);
+
+  protected abstract List<Resume> doCopyAll();
 
   public void update(Resume r) {
     Object searchKey = getExistedSearchKey(r.getUuid());
@@ -43,7 +47,6 @@ public abstract class AbstractStorage implements Storage {
     if (isExist(searchKey)) {
       throw new ExistStorageException(uuid);
     }
-    // TODO: Возвращать ключ в рамках которого можно положить следующую запись
     return searchKey;
   }
 
@@ -53,5 +56,12 @@ public abstract class AbstractStorage implements Storage {
       throw new NotExistStorageException(uuid);
     }
     return searchKey;
+  }
+
+  @Override
+  public List<Resume> getAllSorted() {
+    List<Resume> list = doCopyAll();
+    Collections.sort(list);
+    return list;
   }
 }
