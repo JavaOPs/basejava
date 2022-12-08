@@ -1,6 +1,6 @@
 package ru.javawebinar.basejava.model;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
@@ -13,8 +13,8 @@ public class Resume implements Comparable<Resume> {
   // Unique identifier
   private final String uuid;
   private final String fullName;
-  private final Map<ContactType, Contact> contacts = new HashMap<>();
-  private final Map<SectionType, Section> sections = new HashMap<>();
+  private final Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
+  private final Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
 
   public Resume(String uuid, String fullName) {
     Objects.requireNonNull(uuid, "uuid must not be null");
@@ -33,6 +33,14 @@ public class Resume implements Comparable<Resume> {
 
   public String getFullName() {
     return fullName;
+  }
+
+  public String getContact(ContactType type) {
+    return contacts.get(type);
+  }
+
+  public Section getSection(SectionType type) {
+    return sections.get(type);
   }
 
   @Override
@@ -66,23 +74,7 @@ public class Resume implements Comparable<Resume> {
     return compareFullName != 0 ? compareFullName : uuid.compareTo(o.uuid);
   }
 
-  public void addContactInfo(ContactType contactType, Contact contact) {
-    contacts.put(contactType, contact);
-  }
-
-  public void removeContactInfo(ContactType contactType) {
-    contacts.remove(contactType);
-  }
-
-  public void addSection(SectionType sectionType, Section section) {
-    sections.put(sectionType, section);
-  }
-
-  public void removeSection(SectionType sectionType) {
-    sections.remove(sectionType);
-  }
-
-  public Map<ContactType, Contact> getContacts() {
+  public Map<ContactType, String> getContacts() {
     return contacts;
   }
 
