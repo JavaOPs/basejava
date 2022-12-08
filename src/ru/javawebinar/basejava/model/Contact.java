@@ -12,4 +12,8 @@ public class Contact {
   public String getContent() {
     return content;
   }
+
+  public ContactType getType() {
+    return type;
+  }
 }
