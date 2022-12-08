@@ -33,7 +33,7 @@ public class MainArray {
           printAll();
           break;
         case "update":
-          r = new Resume(parameter, params[2]);
+          r = new Resume(parameter, params[2], sections);
           ARRAY_STORAGE.update(r);
           printAll();
           break;
@@ -41,7 +41,7 @@ public class MainArray {
           System.out.println(ARRAY_STORAGE.size());
           break;
         case "save":
-          r = new Resume(parameter);
+          r = new Resume(parameter, sections);
           ARRAY_STORAGE.save(r);
           printAll();
           break;
