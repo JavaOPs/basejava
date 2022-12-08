@@ -5,7 +5,7 @@ public enum ContactType {
   SKYPE("Skype"),
   EMAIL("Email"),
   OTHER_INFO("");
-  private String title;
+  private final String title;
 
   ContactType(String title) {
     this.title = title;

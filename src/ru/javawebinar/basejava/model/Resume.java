@@ -66,19 +66,27 @@ public class Resume implements Comparable<Resume> {
     return compareFullName != 0 ? compareFullName : uuid.compareTo(o.uuid);
   }
 
-  private void addContactInfo(ContactType contactType, Contact contact) {
+  public void addContactInfo(ContactType contactType, Contact contact) {
     contacts.put(contactType, contact);
   }
 
-  private void removeContactInfo(ContactType contactType) {
+  public void removeContactInfo(ContactType contactType) {
     contacts.remove(contactType);
   }
 
-  private void addSection(SectionType sectionType, Section section) {
+  public void addSection(SectionType sectionType, Section section) {
     sections.put(sectionType, section);
   }
 
-  private void removeSection(SectionType sectionType) {
+  public void removeSection(SectionType sectionType) {
     sections.remove(sectionType);
+  }
+
+  public Map<ContactType, Contact> getContacts() {
+    return contacts;
+  }
+
+  public Map<SectionType, Section> getSections() {
+    return sections;
   }
 }
