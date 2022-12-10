@@ -1,6 +1,5 @@
 package ru.javawebinar.basejava.exception;
 
-import java.io.IOException;
 
 public class StorageException extends RuntimeException {
 

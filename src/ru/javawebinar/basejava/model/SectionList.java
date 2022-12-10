@@ -1,12 +1,16 @@
 package ru.javawebinar.basejava.model;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class SectionList extends Section {
 
   private final List<String> content;
+
+  public SectionList(String... items) {
+    this(Arrays.asList(items));
+  }
 
   public SectionList(List<String> content) {
     Objects.requireNonNull(content, "content mustn't be null");
