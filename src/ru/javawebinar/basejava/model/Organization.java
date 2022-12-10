@@ -1,37 +1,23 @@
 package ru.javawebinar.basejava.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Organization {
 
   private final Link homePage;
-  private final LocalDate startDate;
-  private final LocalDate endDate;
-  private final String title;
-  private final String description;
+  private final List<Position> positions;
 
-  public Organization(String name, String url, LocalDate startDate, LocalDate endDate, String title,
-      String description) {
-    Objects.requireNonNull(startDate, "startDate mustn't be null");
-    Objects.requireNonNull(endDate, "endDate mustn't be null");
-    Objects.requireNonNull(title, "title mustn't be null");
+  public Organization(String name, String url, List<Position> positions) {
+    Objects.requireNonNull(positions, "positions mustn't be null");
     this.homePage = new Link(name, url);
-    this.startDate = startDate;
-    this.endDate = endDate;
-    this.title = title;
-    this.description = description;
+    this.positions = positions;
   }
 
-  @Override
-  public String toString() {
-    return "Organization{" +
-        "homePage=" + homePage +
-        ", startDate=" + startDate +
-        ", endDate=" + endDate +
-        ", title='" + title + '\'' +
-        ", description='" + description + '\'' +
-        '}';
+  public List<Position> getPositions() {
+    return positions;
   }
 
   @Override
@@ -43,13 +29,19 @@ public class Organization {
       return false;
     }
     Organization that = (Organization) o;
-    return homePage.equals(that.homePage) && startDate.equals(that.startDate) && endDate.equals(
-        that.endDate) && title.equals(that.title) && Objects.equals(description,
-        that.description);
+    return homePage.equals(that.homePage) && positions.equals(that.positions);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(homePage, startDate, endDate, title, description);
+    return Objects.hash(homePage, positions);
+  }
+
+  @Override
+  public String toString() {
+    return "Organization{" +
+        "homePage=" + homePage +
+        ", positions=" + positions +
+        '}';
   }
 }
