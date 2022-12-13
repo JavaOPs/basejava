@@ -6,6 +6,8 @@ import java.util.Objects;
 
 public class SectionList extends Section {
 
+  private static final long serialVersionUID = 1L;
+
   private final List<String> content;
 
   public SectionList(String... items) {

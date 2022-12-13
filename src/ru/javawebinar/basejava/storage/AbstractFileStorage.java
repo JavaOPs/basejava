@@ -1,7 +1,13 @@
 package ru.javawebinar.basejava.storage;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -23,9 +29,9 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     this.directory = directory;
   }
 
-  protected abstract void doWrite(Resume r, File file) throws IOException;
+  protected abstract void doWrite(Resume r, OutputStream os) throws IOException;
 
-  protected abstract Resume doRead(File file) throws IOException;
+  protected abstract Resume doRead(InputStream is) throws IOException;
 
   @Override
   protected File getSearchKey(String uuid) {
@@ -35,7 +41,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
   @Override
   protected void doUpdate(Resume r, File file) {
     try {
-      doWrite(r, file);
+      doWrite(r, new BufferedOutputStream(new FileOutputStream(file)));
     } catch (IOException e) {
       throw new StorageException("File write error", r.getUuid(), e);
     }
@@ -67,7 +73,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
   @Override
   protected Resume doGet(File file) {
     try {
-      return doRead(file);
+      return doRead(new BufferedInputStream(new FileInputStream(file)));
     } catch (IOException e) {
       throw new StorageException("File read error", file.getName(), e);
     }
@@ -100,7 +106,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
   public int size() {
     String[] files = directory.list();
     if (files == null) {
-      throw new StorageException("Directory read error", directory.getName());
+      throw new StorageException("Directory read error", null);
     }
     return files.length;
   }
