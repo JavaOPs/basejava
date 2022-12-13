@@ -1,6 +1,7 @@
 package ru.javawebinar.basejava.storage;
 
 
+import java.io.File;
 import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
@@ -18,6 +19,9 @@ import ru.javawebinar.basejava.model.SectionOrganization;
 import ru.javawebinar.basejava.model.SectionType;
 
 public abstract class AbstractStorageTest {
+
+  protected static final File STORAGE_DIR = new File(
+      "/Users/vladimirsafronov/Desktop/java/projects/basejava/storage");
 
   protected final Storage storage;
 
@@ -81,7 +85,7 @@ public abstract class AbstractStorageTest {
   public void update() {
     Resume newResume = new Resume(UUID_1, "New Name");
     storage.update(newResume);
-    Assertions.assertSame(newResume, storage.get(UUID_1));
+    Assertions.assertEquals(newResume, storage.get(UUID_1));
   }
 
   @Test
