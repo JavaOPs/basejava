@@ -29,23 +29,18 @@ public class MainFile {
       throw new RuntimeException(e);
     }
 
-    showAllFiles(dir);
+    showAllFiles(dir, "");
   }
 
-  private static void showAllFiles(File dir) {
-    StringBuilder sb = new StringBuilder();
-    if (dir.isDirectory()) {
-      System.out.println("Searching at: " + dir.getAbsolutePath());
-      File[] files = dir.listFiles();
-      if (files != null) {
-        sb.append("\t");
-        for (File file : files) {
-          if (file.isDirectory()) {
-            sb.append("\t");
-            showAllFiles(file);
-          } else if (file.isFile()) {
-            System.out.println(sb + "File: " + file.getName());
-          }
+  private static void showAllFiles(File dir, String offset) {
+    File[] files = dir.listFiles();
+    if (files != null) {
+      for (File file : files) {
+        if (file.isFile()) {
+          System.out.println(offset + "file: " + file.getName());
+        } else if (file.isDirectory()) {
+          System.out.println(offset + "directory: " + file.getName());
+          showAllFiles(file, offset + "  ");
         }
       }
     }
