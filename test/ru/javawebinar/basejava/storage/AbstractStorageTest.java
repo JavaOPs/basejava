@@ -23,7 +23,7 @@ public abstract class AbstractStorageTest {
   protected static final File STORAGE_DIR = new File(
       "/Users/vladimirsafronov/Desktop/java/projects/basejava/storage");
 
-  protected final Storage storage;
+  protected Storage storage;
 
   protected AbstractStorageTest(Storage storage) {
     this.storage = storage;
@@ -43,6 +43,7 @@ public abstract class AbstractStorageTest {
     R2 = new Resume(UUID_2, "Name2");
     R3 = new Resume(UUID_3, "Name3");
     R4 = new Resume(UUID_4, "Name4");
+
     R1.addContact(ContactType.MOBILE_PHONE, "+79001234567");
     R1.addContact(ContactType.EMAIL, "abc@mail.ru");
     R1.addSection(SectionType.OBJECTIVE, new SectionLine("Objective"));

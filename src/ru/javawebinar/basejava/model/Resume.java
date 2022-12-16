@@ -5,18 +5,26 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Initial resume class
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Resume implements Comparable<Resume>, Serializable {
 
   private static final long serialVersionUID = 1L;
-  
-  private final String uuid;
-  private final String fullName;
+
+  private String uuid;
+  private String fullName;
   private final Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
   private final Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
+
+  public Resume() {
+  }
 
   public Resume(String uuid, String fullName) {
     Objects.requireNonNull(uuid, "uuid must not be null");
@@ -33,24 +41,12 @@ public class Resume implements Comparable<Resume>, Serializable {
     return uuid;
   }
 
-  public String getFullName() {
-    return fullName;
-  }
-
   public String getContact(ContactType type) {
     return contacts.get(type);
   }
 
   public Section getSection(SectionType type) {
     return sections.get(type);
-  }
-
-  public Map<ContactType, String> getContacts() {
-    return contacts;
-  }
-
-  public Map<SectionType, Section> getSections() {
-    return sections;
   }
 
   public void addContact(ContactType type, String value) {
@@ -70,12 +66,15 @@ public class Resume implements Comparable<Resume>, Serializable {
       return false;
     }
     Resume resume = (Resume) o;
-    return uuid.equals(resume.uuid) && fullName.equals(resume.fullName);
+    return Objects.equals(uuid, resume.uuid) &&
+        Objects.equals(fullName, resume.fullName) &&
+        Objects.equals(contacts, resume.contacts) &&
+        Objects.equals(sections, resume.sections);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(uuid, fullName);
+    return Objects.hash(uuid, fullName, contacts, sections);
   }
 
   @Override
