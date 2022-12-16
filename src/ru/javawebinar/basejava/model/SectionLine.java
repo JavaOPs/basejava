@@ -6,7 +6,10 @@ public class SectionLine extends Section {
 
   private static final long serialVersionUID = 1L;
 
-  private final String content;
+  private String content;
+
+  public SectionLine() {
+  }
 
   public SectionLine(String content) {
     Objects.requireNonNull(content, "content mustn't be null");

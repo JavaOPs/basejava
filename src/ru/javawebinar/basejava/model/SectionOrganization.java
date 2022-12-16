@@ -8,7 +8,10 @@ public class SectionOrganization extends Section {
 
   private static final long serialVersionUID = 1L;
 
-  private final List<Organization> organizations;
+  private List<Organization> organizations;
+
+  public SectionOrganization() {
+  }
 
   public SectionOrganization(Organization... organizations) {
     this(Arrays.asList(organizations));
