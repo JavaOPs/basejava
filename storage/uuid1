@@ -1,1 +1,97 @@
-{"uuid":"uuid1","fullName":"Name1","contacts":{"MOBILE_PHONE":"+79001234567","EMAIL":"abc@mail.ru"},"sections":{"PERSONAL":{"CLASSNAME":"ru.javawebinar.basejava.model.SectionLine","INSTANCE":{"content":"Personal data"}},"OBJECTIVE":{"CLASSNAME":"ru.javawebinar.basejava.model.SectionLine","INSTANCE":{"content":"Objective"}},"ACHIEVEMENT":{"CLASSNAME":"ru.javawebinar.basejava.model.SectionList","INSTANCE":{"content":["Achievement11","Achievement12","Achievement13"]}},"QUALIFICATION":{"CLASSNAME":"ru.javawebinar.basejava.model.SectionList","INSTANCE":{"content":["Java","git","SQL"]}},"EXPERIENCE":{"CLASSNAME":"ru.javawebinar.basejava.model.SectionOrganization","INSTANCE":{"organizations":[{"homePage":{"name":"Organization11","url":"http://organization11.ru"},"positions":[{"startDate":{"year":2015,"month":1,"day":1},"endDate":{"year":3000,"month":1,"day":1},"title":"position11","description":"content11"},{"startDate":{"year":2010,"month":7,"day":1},"endDate":{"year":2014,"month":12,"day":1},"title":"position12","description":"content12"}]}]}},"EDUCATION":{"CLASSNAME":"ru.javawebinar.basejava.model.SectionOrganization","INSTANCE":{"organizations":[{"homePage":{"name":"university"},"positions":[{"startDate":{"year":2005,"month":9,"day":1},"endDate":{"year":2010,"month":6,"day":1},"title":"aspirant"},{"startDate":{"year":2001,"month":9,"day":1},"endDate":{"year":2005,"month":4,"day":1},"title":"student","description":"IT"}]},{"homePage":{"name":"Organization12","url":"http://organization12.ru"},"positions":[]}]}}}}
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<resume>
+    <uuid>uuid1</uuid>
+    <fullName>Name1</fullName>
+    <contacts>
+        <entry>
+            <key>MOBILE_PHONE</key>
+            <value>+79001234567</value>
+        </entry>
+        <entry>
+            <key>EMAIL</key>
+            <value>abc@mail.ru</value>
+        </entry>
+    </contacts>
+    <sections>
+        <entry>
+            <key>PERSONAL</key>
+            <value xsi:type="sectionLine" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <content>Personal data</content>
+            </value>
+        </entry>
+        <entry>
+            <key>OBJECTIVE</key>
+            <value xsi:type="sectionLine" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <content>Objective</content>
+            </value>
+        </entry>
+        <entry>
+            <key>ACHIEVEMENT</key>
+            <value xsi:type="sectionList" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <content>Achievement11</content>
+                <content>Achievement12</content>
+                <content>Achievement13</content>
+            </value>
+        </entry>
+        <entry>
+            <key>QUALIFICATION</key>
+            <value xsi:type="sectionList" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <content>Java</content>
+                <content>git</content>
+                <content>SQL</content>
+            </value>
+        </entry>
+        <entry>
+            <key>EXPERIENCE</key>
+            <value xsi:type="sectionOrganization" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <organizations>
+                    <homePage>
+                        <name>Organization11</name>
+                        <url>http://organization11.ru</url>
+                    </homePage>
+                    <positions>
+                        <startDate>2015-01-01</startDate>
+                        <endDate>3000-01-01</endDate>
+                        <title>position11</title>
+                        <description>content11</description>
+                    </positions>
+                    <positions>
+                        <startDate>2010-07-01</startDate>
+                        <endDate>2014-12-01</endDate>
+                        <title>position12</title>
+                        <description>content12</description>
+                    </positions>
+                </organizations>
+            </value>
+        </entry>
+        <entry>
+            <key>EDUCATION</key>
+            <value xsi:type="sectionOrganization" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <organizations>
+                    <homePage>
+                        <name>university</name>
+                        <url></url>
+                    </homePage>
+                    <positions>
+                        <startDate>2005-09-01</startDate>
+                        <endDate>2010-06-01</endDate>
+                        <title>aspirant</title>
+                        <description></description>
+                    </positions>
+                    <positions>
+                        <startDate>2001-09-01</startDate>
+                        <endDate>2005-04-01</endDate>
+                        <title>student</title>
+                        <description>IT</description>
+                    </positions>
+                </organizations>
+                <organizations>
+                    <homePage>
+                        <name>Organization12</name>
+                        <url>http://organization12.ru</url>
+                    </homePage>
+                </organizations>
+            </value>
+        </entry>
+    </sections>
+</resume>
