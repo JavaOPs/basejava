@@ -9,6 +9,9 @@ public class MainConcurrency {
   public static final int THREADS_NUMBER = 10000;
   private static int counter = 0;
 
+  final String resource1 = "1";
+  final String resource2 = "2";
+
   public static void main(String[] args) throws InterruptedException {
     System.out.println(Thread.currentThread().getName());
     Thread thread0 = new Thread() {
@@ -37,7 +40,7 @@ public class MainConcurrency {
       thread.start();
       threads.add(thread);
 //    Thread.sleep(500);
-      threads.forEach( t -> {
+      threads.forEach(t -> {
         try {
           t.join();
         } catch (InterruptedException e) {
@@ -46,6 +49,37 @@ public class MainConcurrency {
       });
     }
     System.out.println(counter);
+
+    Thread deadLock1 = new Thread(() -> {
+      synchronized (mainConcurrency.resource1) {
+        System.out.println(Thread.currentThread().getName() + " caught resource1");
+        try {
+          Thread.sleep(500);
+        } catch (InterruptedException e) {
+          throw new RuntimeException(e);
+        }
+        synchronized (mainConcurrency.resource2) {
+          System.out.println(Thread.currentThread().getName() + " caught resource2");
+        }
+      }
+    });
+
+    Thread deadLock2 = new Thread(() -> {
+      synchronized (mainConcurrency.resource2) {
+        System.out.println(Thread.currentThread().getName() + " caught resource2");
+        try {
+          Thread.sleep(500);
+        } catch (InterruptedException e) {
+          throw new RuntimeException(e);
+        }
+        synchronized (mainConcurrency.resource1) {
+          System.out.println(Thread.currentThread().getName() + " caught resource1");
+        }
+      }
+    });
+
+    deadLock1.start();
+    deadLock2.start();
   }
 
   private synchronized void increment() {
@@ -53,10 +87,9 @@ public class MainConcurrency {
 //    synchronized (LOCK) {
 //    synchronized (this) {
 //    synchronized (MainConcurrency.class) {
-      counter++;
+    counter++;
 //    }
 //    }
 //    }
   }
-
 }
