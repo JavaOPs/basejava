@@ -10,15 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import ru.javawebinar.basejava.model.ContactType;
-import ru.javawebinar.basejava.model.Link;
-import ru.javawebinar.basejava.model.Organization;
-import ru.javawebinar.basejava.model.Resume;
-import ru.javawebinar.basejava.model.Section;
-import ru.javawebinar.basejava.model.SectionLine;
-import ru.javawebinar.basejava.model.SectionList;
-import ru.javawebinar.basejava.model.SectionOrganization;
-import ru.javawebinar.basejava.model.SectionType;
+import ru.javawebinar.basejava.model.*;
 
 public class DataStreamSerializer implements StreamSerializer {
 
