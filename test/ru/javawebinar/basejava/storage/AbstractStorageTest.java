@@ -10,13 +10,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import ru.javawebinar.basejava.exception.ExistStorageException;
 import ru.javawebinar.basejava.exception.NotExistStorageException;
-import ru.javawebinar.basejava.model.ContactType;
-import ru.javawebinar.basejava.model.Organization;
-import ru.javawebinar.basejava.model.Resume;
-import ru.javawebinar.basejava.model.SectionLine;
-import ru.javawebinar.basejava.model.SectionList;
-import ru.javawebinar.basejava.model.SectionOrganization;
-import ru.javawebinar.basejava.model.SectionType;
+import ru.javawebinar.basejava.model.*;
 import ru.javawebinar.basejava.Config;
 
 public abstract class AbstractStorageTest {
