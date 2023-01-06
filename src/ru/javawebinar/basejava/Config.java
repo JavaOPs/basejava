@@ -8,23 +8,27 @@ import java.util.Properties;
 
 public class Config {
 
-  private static final Config INSTANCE = new Config();
-  private static final File PROPS = new File("config/resumes.properties");
-  Properties properties = new Properties();
-  private final File storageDir;
+  private static Config INSTANCE;
+  private static File storageDir;
 
   public static Config get() {
+    if (INSTANCE == null) {
+      Properties properties = new Properties();
+      File fileWithProperties = new File("config/resumes.properties");
+
+      try (InputStream is = new FileInputStream(fileWithProperties)) {
+        properties.load(is);
+        storageDir = new File(properties.getProperty("storage.dir"));
+      } catch (IOException e) {
+        throw new IllegalStateException(
+            "Invalid config file " + fileWithProperties.getAbsolutePath());
+      }
+      INSTANCE = new Config();
+    }
     return INSTANCE;
   }
 
   private Config() {
-    try (InputStream is = new FileInputStream(PROPS)) {
-      properties.load(is);
-      storageDir = new File(properties.getProperty("storage.dir"));
-    } catch (IOException e) {
-      throw new IllegalStateException("Invalid config file " + PROPS.getAbsolutePath());
-    }
-
   }
 
   public File getStorageDir() {
