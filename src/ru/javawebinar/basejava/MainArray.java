@@ -1,3 +1,5 @@
+package ru.javawebinar.basejava;
+
 import java.util.List;
 import ru.javawebinar.basejava.model.Resume;
 import ru.javawebinar.basejava.storage.ArrayStorage;

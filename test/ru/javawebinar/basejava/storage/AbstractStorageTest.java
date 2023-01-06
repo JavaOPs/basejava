@@ -17,11 +17,11 @@ import ru.javawebinar.basejava.model.SectionLine;
 import ru.javawebinar.basejava.model.SectionList;
 import ru.javawebinar.basejava.model.SectionOrganization;
 import ru.javawebinar.basejava.model.SectionType;
+import ru.javawebinar.basejava.Config;
 
 public abstract class AbstractStorageTest {
 
-  protected static final File STORAGE_DIR = new File(
-      "/Users/vladimirsafronov/Desktop/java/projects/basejava/storage");
+  protected static final File STORAGE_DIR = Config.get().getStorageDir();
 
   protected Storage storage;
 
