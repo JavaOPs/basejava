@@ -5,11 +5,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import ru.javawebinar.basejava.storage.SqlStorage;
+import ru.javawebinar.basejava.storage.Storage;
 
 public class Config {
 
   private static Config INSTANCE;
   private static File storageDir;
+  private static Storage storage;
 
   public static Config get() {
     if (INSTANCE == null) {
@@ -19,6 +22,9 @@ public class Config {
       try (InputStream is = new FileInputStream(fileWithProperties)) {
         properties.load(is);
         storageDir = new File(properties.getProperty("storage.dir"));
+        storage = new SqlStorage(properties.getProperty("db.url"),
+            properties.getProperty("db.user"),
+            properties.getProperty("db.password"));
       } catch (IOException e) {
         throw new IllegalStateException(
             "Invalid config file " + fileWithProperties.getAbsolutePath());
@@ -33,5 +39,9 @@ public class Config {
 
   public File getStorageDir() {
     return storageDir;
+  }
+
+  public Storage getStorage() {
+    return storage;
   }
 }
