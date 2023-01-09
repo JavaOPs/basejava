@@ -6,8 +6,6 @@ import java.sql.SQLException;
 import ru.javawebinar.basejava.exception.StorageException;
 
 public class SqlHelper {
-
-  private SqlExecutor sqlExecutor;
   private final ConnectionFactory connectionFactory;
 
   public SqlHelper(ConnectionFactory connectionFactory) {
