@@ -4,6 +4,7 @@ package ru.javawebinar.basejava.storage;
 import java.io.File;
 import java.time.Month;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
@@ -39,8 +40,12 @@ public abstract class AbstractStorageTest {
     R3 = new Resume(UUID_3, "Name3");
     R4 = new Resume(UUID_4, "Name4");
 
-//    R1.addContact(ContactType.MOBILE_PHONE, "+79001234567");
-//    R1.addContact(ContactType.EMAIL, "abc@mail.ru");
+    R1.addContact(ContactType.MOBILE_PHONE, "+79001234567");
+    R1.addContact(ContactType.EMAIL, "abc@mail.ru");
+    R4.addContact(ContactType.SKYPE, "Skype");
+    R4.addContact(ContactType.MOBILE_PHONE, "+76666666666");
+
+
 //    R1.addSection(SectionType.OBJECTIVE, new SectionLine("Objective"));
 //    R1.addSection(SectionType.PERSONAL, new SectionLine("Personal data"));
 //    R1.addSection(SectionType.ACHIEVEMENT,
@@ -80,6 +85,9 @@ public abstract class AbstractStorageTest {
   @Test
   public void update() {
     Resume newResume = new Resume(UUID_1, "New Name");
+    R1.addContact(ContactType.EMAIL, "m1@google.com");
+    R1.addContact(ContactType.SKYPE, "newSkype");
+    R1.addContact(ContactType.MOBILE_PHONE, "+79877654321");
     storage.update(newResume);
     Assertions.assertEquals(newResume, storage.get(UUID_1));
   }
@@ -139,7 +147,10 @@ public abstract class AbstractStorageTest {
   public void getAllSorted() throws Exception {
     List<Resume> testStorage = storage.getAllSorted();
     Assertions.assertEquals(3, testStorage.size());
-    Assertions.assertEquals(testStorage, Arrays.asList(R1, R2, R3));
+    List<Resume> sortedList = Arrays.asList(R1, R2, R3);
+    Collections.sort(sortedList);
+    Assertions.assertEquals(sortedList, testStorage);
+
   }
 
   @Test
