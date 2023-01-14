@@ -17,7 +17,7 @@ public class Config {
   public static Config get() {
     if (INSTANCE == null) {
       Properties properties = new Properties();
-      File fileWithProperties = new File("config/resumes.properties");
+      File fileWithProperties = new File(getHomeDir(), "config/resumes.properties");
 
       try (InputStream is = new FileInputStream(fileWithProperties)) {
         properties.load(is);
@@ -43,5 +43,14 @@ public class Config {
 
   public Storage getStorage() {
     return storage;
+  }
+
+  private static File getHomeDir() {
+    String prop = System.getProperty("homeDir");
+    File homeDir = new File(prop != null ? prop : ".");
+    if (!homeDir.isDirectory()) {
+      throw new IllegalStateException(homeDir + " isn't directory!");
+    }
+    return homeDir;
   }
 }
