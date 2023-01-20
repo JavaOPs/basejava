@@ -5,7 +5,7 @@ import java.util.Objects;
 public class SectionLine extends Section {
 
   private static final long serialVersionUID = 1L;
-
+  public static final SectionLine EMPTY = new SectionLine("");
   private String content;
 
   public SectionLine() {

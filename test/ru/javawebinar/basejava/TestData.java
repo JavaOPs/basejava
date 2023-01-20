@@ -27,23 +27,23 @@ public class TestData {
     R3 = new Resume(UUID_3, "Name3");
     R4 = new Resume(UUID_4, "Name4");
 
-    R1.addContact(ContactType.MOBILE_PHONE, "+79001234567");
-    R1.addContact(ContactType.EMAIL, "abc@mail.ru");
-    R4.addContact(ContactType.SKYPE, "Skype");
-    R4.addContact(ContactType.MOBILE_PHONE, "+76666666666");
+    R1.setContact(ContactType.MOBILE_PHONE, "+79001234567");
+    R1.setContact(ContactType.EMAIL, "abc@mail.ru");
+    R4.setContact(ContactType.SKYPE, "Skype");
+    R4.setContact(ContactType.MOBILE_PHONE, "+76666666666");
 
-    R1.addSection(SectionType.OBJECTIVE, new SectionLine("Objective"));
-    R1.addSection(SectionType.PERSONAL, new SectionLine("Personal data"));
-    R1.addSection(SectionType.ACHIEVEMENT,
+    R1.setSection(SectionType.OBJECTIVE, new SectionLine("Objective"));
+    R1.setSection(SectionType.PERSONAL, new SectionLine("Personal data"));
+    R1.setSection(SectionType.ACHIEVEMENT,
         new SectionList("Achievement11", "Achievement12", "Achievement13"));
-    R1.addSection(SectionType.QUALIFICATION, new SectionList("Java", "git", "SQL"));
-    R1.addSection(SectionType.EXPERIENCE,
+    R1.setSection(SectionType.QUALIFICATION, new SectionList("Java", "git", "SQL"));
+    R1.setSection(SectionType.EXPERIENCE,
         new SectionOrganization(
             new Organization("Organization11", "http://organization11.ru",
                 new Organization.Position(2015, Month.JANUARY, "position11", "content11"),
                 new Organization.Position(2010, Month.JULY, 2014, Month.DECEMBER, "position12",
                     "content12"))));
-    R1.addSection(SectionType.EDUCATION,
+    R1.setSection(SectionType.EDUCATION,
         new SectionOrganization(
             new Organization("university", null,
                 new Organization.Position(2005, Month.SEPTEMBER, 2010, Month.JUNE, "aspirant",
@@ -52,9 +52,9 @@ public class TestData {
                     "IT")),
             new Organization("Organization12", "http://organization12.ru")));
 
-    R2.addContact(ContactType.MOBILE_PHONE, "1234567");
-    R2.addContact(ContactType.SKYPE, "@SecondMember");
-    R2.addSection(SectionType.EXPERIENCE,
+    R2.setContact(ContactType.MOBILE_PHONE, "1234567");
+    R2.setContact(ContactType.SKYPE, "@SecondMember");
+    R2.setSection(SectionType.EXPERIENCE,
         new SectionOrganization(
             new Organization("Organization21", "http://organization21.ru",
                 new Organization.Position(2018, Month.JULY, "position21", "content21"))));
