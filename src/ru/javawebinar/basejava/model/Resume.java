@@ -9,14 +9,21 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- * Initial resume class
- */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Resume implements Comparable<Resume>, Serializable {
 
   private static final long serialVersionUID = 1L;
+  public static final Resume EMPTY = new Resume();
+
+  static {
+    EMPTY.setSection(SectionType.OBJECTIVE, SectionLine.EMPTY);
+    EMPTY.setSection(SectionType.PERSONAL, SectionLine.EMPTY);
+    EMPTY.setSection(SectionType.ACHIEVEMENT, SectionList.EMPTY);
+    EMPTY.setSection(SectionType.QUALIFICATION, SectionList.EMPTY);
+    EMPTY.setSection(SectionType.EXPERIENCE, new SectionOrganization(Organization.EMPTY));
+    EMPTY.setSection(SectionType.EDUCATION, new SectionOrganization(Organization.EMPTY));
+  }
 
   private String uuid;
   private String fullName;
@@ -65,11 +72,11 @@ public class Resume implements Comparable<Resume>, Serializable {
     return sections.get(type);
   }
 
-  public void addContact(ContactType type, String value) {
+  public void setContact(ContactType type, String value) {
     contacts.put(type, value);
   }
 
-  public void addSection(SectionType type, Section section) {
+  public void setSection(SectionType type, Section section) {
     sections.put(type, section);
   }
 
