@@ -33,14 +33,14 @@
             <c:set var="section" value="${sectionEntry.value}"/>
             <jsp:useBean id="section" type="ru.javawebinar.basejava.model.Section"/>
             <tr>
-                <td><h3><a name="type.name">${type.title}</a></h3></td>
-                <c:if test="${type=='OBJECTIVE'}">
+            <td><h3><a name="type.name">${type.title}</a></h3></td>
+            <c:if test="${type=='OBJECTIVE'}">
+                <tr>
                     <td>
-                        <h3><%=((SectionLine) section).getContent()%>
-                        </h3>
+                        <%=((SectionLine) section).getContent()%>
                     </td>
-                </c:if>
-            </tr>
+                </tr>
+            </c:if>
             <c:if test="${type!='OBJECTIVE'}">
                 <c:choose>
                     <c:when test="${type=='PERSONAL'}">
@@ -69,12 +69,10 @@
                                 <td>
                                     <c:choose>
                                         <c:when test="${empty org.homePage.url}">
-                                            <h3>${org.homePage.name}</h3>
+                                            ${org.homePage.name}
                                         </c:when>
                                         <c:otherwise>
-                                            <h3>
-                                                <a href="${org.homePage.url}">${org.homePage.name}</a>
-                                            </h3>
+                                            <a href="${org.homePage.url}">${org.homePage.name}</a>
                                         </c:otherwise>
                                     </c:choose>
                                 </td>
@@ -85,7 +83,9 @@
                                 <tr>
                                     <td><%=HtmlUtil.formatDates(position)%>
                                     </td>
-                                    <td><b>${position.title}</b><br>${position.description}</td>
+                                </tr>
+                                <tr>
+                                    <td>${position.title}<br>${position.description}</td>
                                 </tr>
                             </c:forEach>
                         </c:forEach>
