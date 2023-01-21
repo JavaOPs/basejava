@@ -3,6 +3,7 @@
 <%@ page import="ru.javawebinar.basejava.model.SectionList" %>
 <%@ page import="ru.javawebinar.basejava.model.SectionOrganization" %>
 <%@ page import="ru.javawebinar.basejava.util.DateUtil" %>
+<%@ page import="ru.javawebinar.basejava.model.SectionLine" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -20,14 +21,18 @@
         <input type="hidden" name="uuid" value="${resume.uuid}">
         <h1>Name:</h1>
         <dl>
-            <input type="text" name="fullName" size="50" value="${resume.fullName}">
+            <label>
+                <input type="text" name="fullName" size="50" value="${resume.fullName}">
+            </label>
         </dl>
         <h2>Contacts:</h2>
         <c:forEach var="type" items="<%=ContactType.values()%>">
             <dl>
                 <dt>${type.title}</dt>
-                <dd><input type="text" name="${type.name()}" size="30"
-                           value="${resume.getContact(type)}"></dd>
+                <dd><label>
+                    <input type="text" name="${type.name()}" size="30"
+                           value="${resume.getContact(type)}">
+                </label></dd>
             </dl>
         </c:forEach>
         <hr>
@@ -37,14 +42,22 @@
             <h2><a>${type.title}</a></h2>
             <c:choose>
                 <c:when test="${type=='OBJECTIVE'}">
-                    <input type='text' name='${type}' size=75 value=<%=section%>>
+                    <label>
+                        <textarea name='${type}' cols=75
+                                  rows=5><%=((SectionLine) section).getContent()%></textarea>
+                    </label>
                 </c:when>
                 <c:when test="${type=='PERSONAL'}">
-                    <textarea name='${type}' cols=75 rows=5><%=section%></textarea>
+                    <label>
+                        <textarea name='${type}' cols=75
+                                  rows=5><%=((SectionLine) section).getContent()%></textarea>
+                    </label>
                 </c:when>
                 <c:when test="${type=='QUALIFICATION' || type=='ACHIEVEMENT'}">
-                    <textarea name='${type}' cols=75 rows=5>
-                        <%=String.join("\n", ((SectionList) section).getContent())%></textarea>
+                    <label>
+                        <textarea name='${type}' cols=75 rows=5>
+                            <%=String.join("\n", ((SectionList) section).getContent())%></textarea>
+                    </label>
                 </c:when>
                 <c:when test="${type=='EXPERIENCE' || type=='EDUCATION'}">
                     <c:forEach var="org"
@@ -52,13 +65,17 @@
                                varStatus="counter">
                         <dl>
                             <dt>Organization name:</dt>
-                            <dd><input type="text" name='${type}' size=100
-                                       value="${org.homePage.name}"></dd>
+                            <dd><label>
+                                <input type="text" name='${type}' size=100
+                                       value="${org.homePage.name}">
+                            </label></dd>
                         </dl>
                         <dl>
                             <dt>Organization url:</dt>
-                            <dd><input type="text" name='${type}url' size=100
-                                       value="${org.homePage.url}"></dd>
+                            <dd><label>
+                                <input type="text" name='${type}url' size=100
+                                       value="${org.homePage.url}">
+                            </label></dd>
                         </dl>
                         <br>
                         <div style="margin-left: 30px">
@@ -68,32 +85,42 @@
                                 <dl>
                                     <dt>Start date:</dt>
                                     <dd>
-                                        <input type="text" name="${type}${counter.index}startDate"
-                                               size=10
-                                               value="<%=DateUtil.format(pos.getStartDate())%>"
-                                               placeholder="MM/yyyy">
+                                        <label>
+                                            <input type="text"
+                                                   name="${type}${counter.index}startDate"
+                                                   size=10
+                                                   value="<%=DateUtil.format(pos.getStartDate())%>"
+                                                   placeholder="MM/yyyy">
+                                        </label>
                                     </dd>
                                 </dl>
                                 <dl>
                                     <dt>End date:</dt>
                                     <dd>
-                                        <input type="text" name="${type}${counter.index}endDate"
-                                               size=10
-                                               value="<%=DateUtil.format(pos.getEndDate())%>"
-                                               placeholder="MM/yyyy">
+                                        <label>
+                                            <input type="text" name="${type}${counter.index}endDate"
+                                                   size=10
+                                                   value="<%=DateUtil.format(pos.getEndDate())%>"
+                                                   placeholder="MM/yyyy">
+                                        </label>
                                 </dl>
                                 <dl>
                                     <dt>Position:</dt>
                                     <dd>
-                                        <input type="text" name="${type}${counter.index}title"
-                                               size=75
-                                               value="${pos.title}">
+                                        <label>
+                                            <input type="text" name="${type}${counter.index}title"
+                                                   size=75
+                                                   value="${pos.title}">
+                                        </label>
                                 </dl>
                                 <dl>
                                     <dt>Description:</dt>
                                     <dd>
-                                        <textarea name="${type}${counter.index}description" rows=5
-                                                  cols=75>${pos.description}</textarea>
+                                        <label>
+                                            <textarea name="${type}${counter.index}description"
+                                                      rows=5
+                                                      cols=75>${pos.description}</textarea>
+                                        </label>
                                     </dd>
                                 </dl>
                             </c:forEach>
