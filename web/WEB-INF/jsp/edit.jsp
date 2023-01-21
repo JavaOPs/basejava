@@ -31,7 +31,6 @@
             </dl>
         </c:forEach>
         <hr>
-        <h3>Sections:</h3>
         <c:forEach var="type" items="<%=SectionType.values()%>">
             <c:set var="section" value="${resume.getSection(type)}"/>
             <jsp:useBean id="section" type="ru.javawebinar.basejava.model.Section"/>
