@@ -61,7 +61,6 @@ public class ArrayStorage {
     @Override
     public String toString() {
         return "ArrayStorage{" +
-                "storage=" + Arrays.toString(storage) +
-                '}';
+                "storage=" + Arrays.toString(storage);
     }
 }
