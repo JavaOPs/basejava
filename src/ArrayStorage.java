@@ -23,7 +23,7 @@ public class ArrayStorage {
 
     Resume get(String uuid) {
         for (int i = 0; i < size; i++) {
-            if (storage[i] != null && storage[i].getUuid().equals(uuid)) {
+            if (storage[i].getUuid().equals(uuid)) {
                 return storage[i];
             }
         }
@@ -32,11 +32,8 @@ public class ArrayStorage {
 
     void delete(String uuid) {
         for (int i = 0; i < size; i++) {
-            if (storage[i] != null && storage[i].getUuid().equals(uuid)) {
-                for (int j = i; j < size - 1; j++) {
-                    storage[j] = storage[j + 1];
-                }
-                storage[size - 1] = null;
+            if (storage[i].getUuid().equals(uuid)) {
+                storage[i] = storage[size - 1];
                 size--;
                 System.out.println("\nElement " + uuid + " successfully deleted");
                 return;
@@ -44,15 +41,16 @@ public class ArrayStorage {
         }
         System.out.println("\nElement " + uuid + " not found");
     }
+
     /**
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        Resume[] storageAll = new Resume[size];
+        Resume[] resumes = new Resume[size];
         for (int i = 0; i < size; i++) {
-            storageAll[i] = storage[i];
+            resumes[i] = storage[i];
         }
-        return storageAll;
+        return resumes;
     }
 
     int size() {
