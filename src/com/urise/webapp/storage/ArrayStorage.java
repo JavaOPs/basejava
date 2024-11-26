@@ -17,6 +17,17 @@ public class ArrayStorage {
         System.out.println("\nThe array was successfully cleared");
     }
 
+    public void update(Resume r) {
+        for (int i = 0; i < size; i++) {
+            if (storage[i].equals(r)) {
+                storage[i].setUuid(r.getUuid());
+                System.out.println("\nElement " + r + " successfully update");
+            } else {
+                System.out.println("\nERROR: Element " + r + " not found");
+            }
+        }
+    }
+
     public void save(Resume r) {
         if (size < storage.length) {
             storage[size] = r;
@@ -25,7 +36,7 @@ public class ArrayStorage {
         System.out.println("Element " + r + " successfully saved to array");
     }
 
-     public Resume get(String uuid) {
+    public Resume get(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].getUuid().equals(uuid)) {
                 return storage[i];
