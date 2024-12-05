@@ -8,13 +8,14 @@ import java.util.Arrays;
  * Array based storage for Resumes
  */
 public class ArrayStorage extends AbstractArrayStorage {
-
+    @Override
     public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
         System.out.println("\nThe array was successfully cleared");
     }
 
+    @Override
     public void update(Resume r) {
         int index = findIndex(r.getUuid());
         if (index >= 0) {
@@ -24,7 +25,7 @@ public class ArrayStorage extends AbstractArrayStorage {
             System.out.println("\nERROR: Element " + r + " not found");
         }
     }
-
+    @Override
     public void save(Resume r) {
         int index = findIndex(r.getUuid());
         if (index < 0 && size < storage.length) {
@@ -35,7 +36,7 @@ public class ArrayStorage extends AbstractArrayStorage {
             System.out.println("ERROR: array overflow! Element " + r + " not saved to array.");
         }
     }
-
+    @Override
     public Resume get(String uuid) {
         int index = findIndex(uuid);
         if (index >= 0) {
@@ -44,7 +45,7 @@ public class ArrayStorage extends AbstractArrayStorage {
         System.out.println("\nElement " + uuid + " not found");
         return null;
     }
-
+    @Override
     public void delete(String uuid) {
         int index = findIndex(uuid);
         if (index >= 0) {
@@ -59,10 +60,12 @@ public class ArrayStorage extends AbstractArrayStorage {
     /**
      * @return array, contains only Resumes in storage (without null)
      */
+    @Override
     public Resume[] getAll() {
         return Arrays.copyOf(storage, size);
     }
 
+    @Override
     protected int findIndex(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].getUuid().equals(uuid)) {
