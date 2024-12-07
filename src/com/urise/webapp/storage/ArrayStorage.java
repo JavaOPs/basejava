@@ -25,6 +25,7 @@ public class ArrayStorage extends AbstractArrayStorage {
             System.out.println("\nERROR: Element " + r + " not found");
         }
     }
+
     @Override
     public void save(Resume r) {
         int index = findIndex(r.getUuid());
@@ -36,15 +37,7 @@ public class ArrayStorage extends AbstractArrayStorage {
             System.out.println("ERROR: array overflow! Element " + r + " not saved to array.");
         }
     }
-    @Override
-    public Resume get(String uuid) {
-        int index = findIndex(uuid);
-        if (index >= 0) {
-            return storage[index];
-        }
-        System.out.println("\nElement " + uuid + " not found");
-        return null;
-    }
+
     @Override
     public void delete(String uuid) {
         int index = findIndex(uuid);
@@ -75,4 +68,3 @@ public class ArrayStorage extends AbstractArrayStorage {
         return -1;
     }
 }
-

@@ -25,22 +25,16 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     public void save(Resume r) {
-        if (findIndex(r.getUuid()) < 0 && size < storage.length) {
-            storage[size] = r;
+        int index = findIndex(r.getUuid());
+        if (index < 0 && size < storage.length) {
+            int insertIndex = -(Arrays.binarySearch(storage, 0, size, r) + 1);
+            System.arraycopy(storage, insertIndex, storage, insertIndex + 1, size - insertIndex);
+            storage[insertIndex] = r;
             size++;
-            System.out.println("Element " + r + " successfully saved to array");
+            System.out.println("Element " + r + " successfully saved to sorted array");
         } else {
-            System.out.println("ERROR: array overflow! Element " + r + " not saved to array.");
+            System.out.println("ERROR: array overflow! Element " + r + " not saved to sorted array.");
         }
-    }
-    @Override
-    public Resume get(String uuid) {
-        int index = findIndex(uuid);
-        if (index >= 0) {
-            return storage[index];
-        }
-        System.out.println("\nElement " + uuid + " not found");
-        return null;
     }
 
     @Override
