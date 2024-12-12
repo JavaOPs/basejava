@@ -7,11 +7,6 @@ import java.util.Arrays;
 public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
-    public Resume[] getAll() {
-        return Arrays.copyOf(storage, size);
-    }
-
-    @Override
     protected int findIndex(String uuid) {
         Resume searchKey = new Resume();
         searchKey.setUuid(uuid);
@@ -25,11 +20,9 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         storage[insertIndex] = r;
     }
 
-
     @Override
     protected void indexDelete(int index) {
         System.arraycopy(storage, index + 1, storage, index, size - index - 1);
         storage[size - 1] = null;
     }
-
 }

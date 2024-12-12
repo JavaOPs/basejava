@@ -2,21 +2,10 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.model.Resume;
 
-import java.util.Arrays;
-
 /**
  * Array based storage for Resumes
  */
 public class ArrayStorage extends AbstractArrayStorage {
-
-    /**
-     * @return array, contains only Resumes in storage (without null)
-     */
-    @Override
-    public Resume[] getAll() {
-        return Arrays.copyOf(storage, size);
-    }
-
 
     @Override
     protected int findIndex(String uuid) {
@@ -33,10 +22,8 @@ public class ArrayStorage extends AbstractArrayStorage {
          storage[size] = r;
     }
 
-
     @Override
     protected void indexDelete(int index) {
         storage[index] = storage[size - 1];
     }
-
 }

@@ -32,13 +32,14 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public final void save(Resume r) {
         int index = findIndex(r.getUuid());
-        if (index < 0 && size < storage.length) {
+        if (index >= 0 && size < storage.length) {
             System.out.println("ERROR: array overflow! Element " + r + " not saved to storage.");
-        } else {
-            insertResume(r);
-            increaseSize();
-            System.out.println("Element " + r + " successfully saved to storage.");
+            return;
         }
+        insertResume(r);
+        size++;
+        System.out.println("Element " + r + " successfully saved to storage.");
+
     }
 
     public Resume get(String uuid) {
@@ -54,11 +55,15 @@ public abstract class AbstractArrayStorage implements Storage {
         int index = findIndex(uuid);
         if (index < 0) {
             System.out.println("\nElement " + uuid + " not found");
-        } else {
-            indexDelete(index);
-            reductionSize();
-            System.out.println("\nElement " + uuid + " successfully deleted from storage");
+            return;
         }
+        indexDelete(index);
+        size--;
+        System.out.println("\nElement " + uuid + " successfully deleted from storage");
+    }
+
+    public Resume[] getAll() {
+        return Arrays.copyOf(storage, size);
     }
 
     public int size() {
@@ -69,15 +74,5 @@ public abstract class AbstractArrayStorage implements Storage {
 
     protected abstract void insertResume(Resume r);
 
-    protected void increaseSize() {
-        size++;
-    }
-
     protected abstract void indexDelete(int index);
-
-    protected void reductionSize() {
-        size--;
-    }
-
 }
-
