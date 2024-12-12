@@ -2,6 +2,8 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.model.Resume;
 
+import java.util.Arrays;
+
 /**
  * Array based storage for Resumes
  */
@@ -10,42 +12,32 @@ public abstract class AbstractArrayStorage implements Storage {
     protected final Resume[] storage = new Resume[STORAGE_LIMIT];
     protected int size = 0;
 
-    public final void templateMethod() {
-        Resume r1 = new Resume();
-        r1.setUuid("uuid4");
-        Resume r2 = new Resume();
-        r2.setUuid("uuid2");
-        Resume r3 = new Resume();
-        r3.setUuid("uuid1");
-        save(r1);
-        save(r2);
-        save(r3);
-        printAll();
-
-        System.out.println("Get r1: " + get(r1.getUuid()));
-        System.out.println("Size: " + size());
-
-        System.out.println("Get dummy: " + get("dummy"));
-
-        Resume r = new Resume();
-        r.setUuid("uuid2");
-        update(r);
-        save(r);
-
-        printAll();
-        delete(r1.getUuid());
-        printAll();
-        clear();
-        printAll();
-
-        System.out.println("Size: " + size());
-        size();
+    public void clear() {
+        Arrays.fill(storage, 0, size, null);
+        size = 0;
+        System.out.println("\nThe " + storage.getClass().getSimpleName() + " was successfully cleared");
     }
 
-    protected void printAll() {
-        System.out.println("\nGet All");
-        for (Resume r : getAll()) {
-            System.out.println(r);
+
+    public void update(Resume r) {
+        int index = findIndex(r.getUuid());
+        if (index < 0) {
+            System.out.println("\nERROR: Element " + r + " not found");
+            return;
+        }
+        storage[index] = r;
+        System.out.println("\nElement " + r + " successfully update");
+    }
+
+
+    public final void save(Resume r) {
+        int index = findIndex(r.getUuid());
+        if (index < 0 && size < storage.length) {
+            System.out.println("ERROR: array overflow! Element " + r + " not saved to storage.");
+        } else {
+            insertResume(r);
+            increaseSize();
+            System.out.println("Element " + r + " successfully saved to storage.");
         }
     }
 
@@ -58,10 +50,34 @@ public abstract class AbstractArrayStorage implements Storage {
         return null;
     }
 
+    public final void delete(String uuid) {
+        int index = findIndex(uuid);
+        if (index < 0) {
+            System.out.println("\nElement " + uuid + " not found");
+        } else {
+            indexDelete(index);
+            reductionSize();
+            System.out.println("\nElement " + uuid + " successfully deleted from storage");
+        }
+    }
+
     public int size() {
         return size;
     }
 
     protected abstract int findIndex(String uuid);
+
+    protected abstract void insertResume(Resume r);
+
+    protected void increaseSize() {
+        size++;
+    }
+
+    protected abstract void indexDelete(int index);
+
+    protected void reductionSize() {
+        size--;
+    }
+
 }
 

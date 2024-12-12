@@ -8,47 +8,6 @@ import java.util.Arrays;
  * Array based storage for Resumes
  */
 public class ArrayStorage extends AbstractArrayStorage {
-    @Override
-    public void clear() {
-        Arrays.fill(storage, 0, size, null);
-        size = 0;
-        System.out.println("\nThe array was successfully cleared");
-    }
-
-    @Override
-    public void update(Resume r) {
-        int index = findIndex(r.getUuid());
-        if (index >= 0) {
-            storage[index].setUuid(r.getUuid());
-            System.out.println("\nElement " + r + " successfully update");
-        } else {
-            System.out.println("\nERROR: Element " + r + " not found");
-        }
-    }
-
-    @Override
-    public void save(Resume r) {
-        int index = findIndex(r.getUuid());
-        if (index < 0 && size < storage.length) {
-            storage[size] = r;
-            size++;
-            System.out.println("Element " + r + " successfully saved to array");
-        } else {
-            System.out.println("ERROR: array overflow! Element " + r + " not saved to array.");
-        }
-    }
-
-    @Override
-    public void delete(String uuid) {
-        int index = findIndex(uuid);
-        if (index >= 0) {
-            storage[index] = storage[size - 1];
-            size--;
-            System.out.println("\nElement " + uuid + " successfully deleted");
-            return;
-        }
-        System.out.println("\nElement " + uuid + " not found");
-    }
 
     /**
      * @return array, contains only Resumes in storage (without null)
@@ -57,6 +16,7 @@ public class ArrayStorage extends AbstractArrayStorage {
     public Resume[] getAll() {
         return Arrays.copyOf(storage, size);
     }
+
 
     @Override
     protected int findIndex(String uuid) {
@@ -67,4 +27,16 @@ public class ArrayStorage extends AbstractArrayStorage {
         }
         return -1;
     }
+
+    @Override
+    protected void insertResume(Resume r) {
+         storage[size] = r;
+    }
+
+
+    @Override
+    protected void indexDelete(int index) {
+        storage[index] = storage[size - 1];
+    }
+
 }
