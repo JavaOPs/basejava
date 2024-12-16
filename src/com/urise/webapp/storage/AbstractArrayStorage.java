@@ -19,7 +19,7 @@ public abstract class AbstractArrayStorage implements Storage {
     }
 
 
-    public void update(Resume r) {
+    public final void update(Resume r) {
         int index = findIndex(r.getUuid());
         if (index < 0) {
             System.out.println("\nERROR: Element " + r + " not found");
@@ -42,7 +42,7 @@ public abstract class AbstractArrayStorage implements Storage {
 
     }
 
-    public Resume get(String uuid) {
+    public final Resume get(String uuid) {
         int index = findIndex(uuid);
         if (index >= 0) {
             return storage[index];
@@ -57,7 +57,8 @@ public abstract class AbstractArrayStorage implements Storage {
             System.out.println("\nElement " + uuid + " not found");
             return;
         }
-        indexDelete(index);
+        fillDeletedElement(index);
+        removeLastElement();
         size--;
         System.out.println("\nElement " + uuid + " successfully deleted from storage");
     }
@@ -74,5 +75,9 @@ public abstract class AbstractArrayStorage implements Storage {
 
     protected abstract void insertResume(Resume r);
 
-    protected abstract void indexDelete(int index);
+    protected abstract void fillDeletedElement(int index);
+
+    protected void removeLastElement() {
+        storage[size - 1] = null;
+    }
 }
