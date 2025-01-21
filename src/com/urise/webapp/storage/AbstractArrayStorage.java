@@ -1,5 +1,8 @@
 package com.urise.webapp.storage;
 
+import com.urise.webapp.exception.ExistStorageException;
+import com.urise.webapp.exception.NotExistStorageException;
+import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
 
 import java.util.Arrays;
@@ -22,8 +25,7 @@ public abstract class AbstractArrayStorage implements Storage {
     public final void update(Resume r) {
         int index = findIndex(r.getUuid());
         if (index < 0) {
-            System.out.println("\nERROR: Element " + r + " not found");
-            return;
+            throw new NotExistStorageException(r.getUuid());
         }
         storage[index] = r;
         System.out.println("\nElement " + r + " successfully update");
@@ -32,14 +34,14 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public final void save(Resume r) {
         int index = findIndex(r.getUuid());
-        if (index >= 0 && size < storage.length) {
-            System.out.println("ERROR: array overflow! Element " + r + " not saved to storage.");
-            return;
+        if (index >= 0) {
+            throw new ExistStorageException(r.getUuid());
+        } else if (size == STORAGE_LIMIT) {
+            throw new StorageException("Storage overflow", r.getUuid());
         }
         insertResume(r);
         size++;
         System.out.println("Element " + r + " successfully saved to storage.");
-
     }
 
     public final Resume get(String uuid) {
@@ -54,11 +56,10 @@ public abstract class AbstractArrayStorage implements Storage {
     public final void delete(String uuid) {
         int index = findIndex(uuid);
         if (index < 0) {
-            System.out.println("\nElement " + uuid + " not found");
-            return;
+            throw new NotExistStorageException(uuid);
         }
         fillDeletedElement(index);
-        removeLastElement();
+        storage[size - 1] = null;
         size--;
         System.out.println("\nElement " + uuid + " successfully deleted from storage");
     }
@@ -76,8 +77,4 @@ public abstract class AbstractArrayStorage implements Storage {
     protected abstract void insertResume(Resume r);
 
     protected abstract void fillDeletedElement(int index);
-
-    protected void removeLastElement() {
-        storage[size - 1] = null;
-    }
 }
