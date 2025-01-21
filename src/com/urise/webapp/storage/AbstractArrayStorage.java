@@ -39,9 +39,10 @@ public abstract class AbstractArrayStorage implements Storage {
         } else if (size == STORAGE_LIMIT) {
             throw new StorageException("Storage overflow", r.getUuid());
         }
-        insertResume(r);
-        size++;
-        System.out.println("Element " + r + " successfully saved to storage.");
+            insertResume(r);
+            size++;
+            System.out.println("Element " + r + " successfully saved to storage.");
+
     }
 
     public final Resume get(String uuid) {
