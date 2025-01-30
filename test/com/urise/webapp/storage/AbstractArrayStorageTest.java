@@ -8,6 +8,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+
 public abstract class AbstractArrayStorageTest {
 
     private static final String UUID_1 = "uuid1";
@@ -15,14 +17,14 @@ public abstract class AbstractArrayStorageTest {
     private static final String UUID_3 = "uuid3";
     private final Storage storage;
     private final int size = 3;
-   private final Resume SAVE_RESUME = new Resume("uuid4");
+    private final Resume SAVE_RESUME = new Resume("uuid4");
 
     public AbstractArrayStorageTest(Storage storage) {
         this.storage = storage;
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         storage.clear();
         storage.save(new Resume(UUID_1));
         storage.save(new Resume(UUID_2));
@@ -44,7 +46,7 @@ public abstract class AbstractArrayStorageTest {
     }
 
     @Test(expected = NotExistStorageException.class)
-    public void updateNotExist() {
+    public void updateNotExist() throws Exception {
         storage.update(new Resume("dummy"));
     }
 
@@ -52,19 +54,19 @@ public abstract class AbstractArrayStorageTest {
     public void save() {
         storage.save(SAVE_RESUME);
         assertGet(SAVE_RESUME);
-        assertSize(size+1);
+        assertSize(size + 1);
     }
 
-    @Test(expected = ExistStorageException.class)
-    public void saveExist() {
-        storage.save(new Resume(UUID_1));
+    @Test
+    public void saveExist(){
+        assertThrows(ExistStorageException.class, () ->storage.save(new Resume(UUID_1)));
     }
 
     @Test
     public void get() {
         Resume resume = new Resume("uuid1");
         assertGet(resume);
-      }
+    }
 
     public void assertGet(Resume resume) {
         Assert.assertEquals(resume, storage.get(resume.getUuid()));
@@ -79,13 +81,13 @@ public abstract class AbstractArrayStorageTest {
     public void delete() {
         Resume resume = new Resume("uuid2");
         storage.delete(resume.getUuid());
-        assertSize(size-1);
-        Assert.assertThrows(NotExistStorageException.class, () -> storage.get(resume.getUuid()));
+        assertSize(size - 1);
+        assertThrows(NotExistStorageException.class, () -> storage.get(resume.getUuid()));
     }
 
-    @Test(expected = NotExistStorageException.class)
-    public void deleteNotExist() {
-        storage.delete("dummy");
+    @Test
+    public void deleteNotExist() throws Exception {
+        assertThrows(NotExistStorageException.class, () ->storage.delete("dummy"));
     }
 
     @Test
@@ -95,7 +97,7 @@ public abstract class AbstractArrayStorageTest {
         assertGet(new Resume(UUID_1));
         assertGet(new Resume(UUID_2));
         assertGet(new Resume(UUID_3));
-        Resume[] expected = new Resume[] {new Resume(UUID_1), new Resume(UUID_2), new Resume(UUID_3)};
+        Resume[] expected = new Resume[]{new Resume(UUID_1), new Resume(UUID_2), new Resume(UUID_3)};
         Assert.assertArrayEquals(expected, actual);
     }
 
@@ -108,6 +110,7 @@ public abstract class AbstractArrayStorageTest {
         Assert.assertEquals(expectedSize, storage.size());
     }
 
+
     @Test
     public void testStorageOverflow() {
         try {
@@ -115,10 +118,19 @@ public abstract class AbstractArrayStorageTest {
         } catch (StorageException e) {
             Assert.fail("Переполнение произошло раньше времени: " + e.getMessage());
         }
-        try {
-            storage.save(new Resume("uuid4"));
-        } catch (StorageException e) {
-            Assert.fail("Ожидалось исключение StorageException при добавлении в переполненное хранилище");
-        }
+        StorageException thrown = assertThrows(StorageException.class, () -> storage.save(new Resume("uuid5")));
+ Assert.fail("Ожидалось исключение StorageException при добавлении в переполненное хранилище" + thrown);
+//        public void testStorageOverflow() {
+//            try {
+//                Assert.assertEquals(3, storage.size());
+//            } catch (StorageException e) {
+//                Assert.fail("Переполнение произошло раньше времени: " + e.getMessage());
+//            }
+//            try {
+//                storage.save(new Resume("uuid4"));
+//            } catch (StorageException e) {
+//                Assert.fail("Ожидалось исключение StorageException при добавлении в переполненное хранилище");
+//            }
+//        }
     }
 }
