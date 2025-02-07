@@ -8,28 +8,34 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
 public abstract class AbstractArrayStorageTest {
 
     private static final String UUID_1 = "uuid1";
+    private static final Resume RESUME_1 = new Resume(UUID_1);
     private static final String UUID_2 = "uuid2";
+    private static final Resume RESUME_2 = new Resume(UUID_2);
     private static final String UUID_3 = "uuid3";
-    private final Storage storage;
-    private final int size = 3;
-    private final Resume SAVE_RESUME = new Resume("uuid4");
+    private static final Resume RESUME_3 = new Resume(UUID_3);
+    private static final String UUID_4 = "uuid4";
+    private final Resume SAVE_RESUME = new Resume(UUID_4);
     private final Resume UUID_NOT_EXIST = new Resume("dummy");
 
-    public AbstractArrayStorageTest(Storage storage) {
+    private final Storage storage;
+    private final int size = 3;
+
+    protected AbstractArrayStorageTest(Storage storage) {
         this.storage = storage;
     }
 
     @Before
     public void setUp() {
         storage.clear();
-        storage.save(new Resume(UUID_1));
-        storage.save(new Resume(UUID_2));
-        storage.save(new Resume(UUID_3));
+        storage.save(RESUME_1);
+        storage.save(RESUME_2);
+        storage.save(RESUME_3);
     }
 
     @Test
@@ -41,9 +47,8 @@ public abstract class AbstractArrayStorageTest {
 
     @Test
     public void update() {
-        Resume r = new Resume(UUID_2);
-        storage.update(r);
-        Assert.assertSame(r, storage.get(UUID_2));
+        storage.update(RESUME_2);
+        Assert.assertSame(RESUME_2, storage.get(UUID_2));
     }
 
     @Test(expected = NotExistStorageException.class)
@@ -60,13 +65,12 @@ public abstract class AbstractArrayStorageTest {
 
     @Test
     public void saveExist() {
-        assertThrows(ExistStorageException.class, () -> storage.save(new Resume(UUID_1)));
+        assertThrows(ExistStorageException.class, () -> storage.save(RESUME_1));
     }
 
     @Test
     public void get() {
-        Resume resume = new Resume(UUID_1);
-        assertGet(resume);
+        assertGet(RESUME_1);
     }
 
     public void assertGet(Resume resume) {
@@ -80,10 +84,9 @@ public abstract class AbstractArrayStorageTest {
 
     @Test
     public void delete() {
-        Resume resume = new Resume(UUID_2);
-        storage.delete(resume.getUuid());
+        storage.delete(UUID_2);
         assertSize(size - 1);
-        assertThrows(NotExistStorageException.class, () -> storage.get(resume.getUuid()));
+        assertThrows(NotExistStorageException.class, () -> storage.get(UUID_2));
     }
 
     @Test
@@ -93,13 +96,11 @@ public abstract class AbstractArrayStorageTest {
 
     @Test
     public void getAll() {
-        Resume[] actual = storage.getAll();
-        Assert.assertEquals(size, actual.length);
-        assertGet(new Resume(UUID_1));
-        assertGet(new Resume(UUID_2));
-        assertGet(new Resume(UUID_3));
-        Resume[] expected = new Resume[]{new Resume(UUID_1), new Resume(UUID_2), new Resume(UUID_3)};
-        Assert.assertArrayEquals(expected, actual);
+        Resume[] array = storage.getAll();
+        Assert.assertEquals(size, array.length);
+        assertEquals(RESUME_1, array[0]);
+        assertEquals(RESUME_2, array[1]);
+        assertEquals(RESUME_3, array[2]);
     }
 
     @Test
@@ -107,7 +108,7 @@ public abstract class AbstractArrayStorageTest {
         assertSize(size);
     }
 
-    public void assertSize(int expectedSize) {
+    private void assertSize(int expectedSize) {
         Assert.assertEquals(expectedSize, storage.size());
     }
 
@@ -123,6 +124,5 @@ public abstract class AbstractArrayStorageTest {
             Assert.fail("Переполнение произошло раньше времени: " + e.getMessage());
         }
         assertThrows(StorageException.class, () -> storage.save(SAVE_RESUME));
-        // Assert.fail("Ожидалось исключение StorageException при добавлении в переполненное хранилище" );
     }
 }
