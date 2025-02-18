@@ -32,7 +32,7 @@ public abstract class AbstractArrayStorageTest {
         SAVE_RESUME = new Resume(UUID_4);
     }
 
-      private final Resume UUID_NOT_EXIST = new Resume("dummy");
+    private final Resume UUID_NOT_EXIST = new Resume("dummy");
 
     private final int size = 3;
 

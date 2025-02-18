@@ -34,6 +34,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     public final void save(Resume r) {
         doSave(r);
     }
+
     public void doSave(Resume r) {
         int index = findIndex(r.getUuid());
         if (index >= 0) {
@@ -54,7 +55,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         return storage[index];
     }
 
-    public final void delete(String uuid) {
+    public final void doDelete(String uuid) {
         int index = findIndex(uuid);
         if (index < 0) {
             throw new NotExistStorageException(uuid);
@@ -64,9 +65,11 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         size--;
         System.out.println("\nElement " + uuid + " successfully deleted from storage");
     }
+
     protected boolean exist(String uuid) {
-        return findIndex(uuid)>=0;
+        return findIndex(uuid) >= 0;
     }
+
     public Resume[] getAll() {
         return Arrays.copyOf(storage, size);
     }

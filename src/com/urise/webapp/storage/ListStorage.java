@@ -7,7 +7,7 @@ import com.urise.webapp.model.Resume;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListStorage extends AbstractStorage{
+public class ListStorage extends AbstractStorage {
     protected List<Resume> storage = new ArrayList<>();
 
     @Override
@@ -20,6 +20,7 @@ public class ListStorage extends AbstractStorage{
         Resume resume = get(r.getUuid());
         storage.set(storage.indexOf(resume), r);
     }
+
     public final void save(Resume r) {
         doSave(r);
     }
@@ -43,7 +44,7 @@ public class ListStorage extends AbstractStorage{
     }
 
     @Override
-    public void delete(String uuid) {
+    public void doDelete(String uuid) {
         Resume resume = get(uuid);
         storage.remove(resume);
     }
