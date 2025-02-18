@@ -16,7 +16,7 @@ public class ListStorage extends AbstractStorage{
     }
 
     @Override
-    public void update(Resume r) {
+    public void doUpdate(Resume r) {
         Resume resume = get(r.getUuid());
         storage.set(storage.indexOf(resume), r);
     }
@@ -53,5 +53,15 @@ public class ListStorage extends AbstractStorage{
     @Override
     public int size() {
         return storage.size();
+    }
+
+    @Override
+    protected boolean exist(String uuid) {
+        for (Resume resume : storage) {
+            if (resume.getUuid().equals(uuid)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
