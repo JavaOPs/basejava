@@ -33,7 +33,7 @@ public class ListStorage extends AbstractStorage{
     }
 
     @Override
-    public Resume get(String uuid) {
+    public Resume doGet(String uuid) {
         for (Resume resume : storage) {
             if (resume.getUuid().equals(uuid)) {
                 return resume;

@@ -46,7 +46,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         System.out.println("Element " + r + " successfully saved to storage.");
     }
 
-    public final Resume get(String uuid) {
+    public final Resume doGet(String uuid) {
         int index = findIndex(uuid);
         if (index < 0) {
             throw new NotExistStorageException(uuid);

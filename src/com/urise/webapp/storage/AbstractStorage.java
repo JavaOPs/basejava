@@ -33,7 +33,15 @@ public abstract class AbstractStorage implements Storage {
     }
 
     @Override
-    public abstract Resume get(String uuid);
+    public Resume get(String uuid) {
+        if (uuid == null) {
+            throw new IllegalArgumentException("Resume must not be null");
+        }
+        if (!exist(uuid)) {
+            throw new NotExistStorageException(uuid);
+        }
+        return doGet(uuid);
+    }
 
     @Override
     public abstract void delete(String uuid);
@@ -45,6 +53,10 @@ public abstract class AbstractStorage implements Storage {
     public abstract int size();
 
     protected abstract boolean exist(String uuid);
+
     protected abstract void doUpdate(Resume r);
+
     protected abstract void doSave(Resume r);
+
+    protected abstract Resume doGet(String uuid);
 }
