@@ -20,9 +20,12 @@ public class ListStorage extends AbstractStorage{
         Resume resume = get(r.getUuid());
         storage.set(storage.indexOf(resume), r);
     }
+    public final void save(Resume r) {
+        doSave(r);
+    }
 
     @Override
-    public void save(Resume r) {
+    public void doSave(Resume r) {
         if (storage.contains(r)) {
             throw new ExistStorageException(r.getUuid());
         }

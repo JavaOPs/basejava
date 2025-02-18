@@ -31,8 +31,10 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         System.out.println("\nElement " + r + " successfully update");
     }
 
-
     public final void save(Resume r) {
+        doSave(r);
+    }
+    public void doSave(Resume r) {
         int index = findIndex(r.getUuid());
         if (index >= 0) {
             throw new ExistStorageException(r.getUuid());
@@ -64,7 +66,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
     protected boolean exist(String uuid) {
         return findIndex(uuid)>=0;
-    };
+    }
     public Resume[] getAll() {
         return Arrays.copyOf(storage, size);
     }
