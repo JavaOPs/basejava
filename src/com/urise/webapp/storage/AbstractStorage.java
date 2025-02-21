@@ -6,9 +6,6 @@ import com.urise.webapp.model.Resume;
 public abstract class AbstractStorage implements Storage {
 
     @Override
-    public abstract void clear();
-
-    @Override
     public void update(Resume r) {
         if (r == null) {
             throw new IllegalArgumentException("Resume must not be null");
@@ -53,12 +50,6 @@ public abstract class AbstractStorage implements Storage {
         }
         doDelete(uuid);
     }
-
-    @Override
-    public abstract Resume[] getAll();
-
-    @Override
-    public abstract int size();
 
     protected abstract boolean exist(String uuid);
 
