@@ -31,10 +31,6 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         System.out.println("\nElement " + r + " successfully update");
     }
 
-    public final void save(Resume r) {
-        doSave(r);
-    }
-
     public void doSave(Resume r) {
         Object searchKey = getSearchKey(r.getUuid());
         if (isExisting(searchKey)) {

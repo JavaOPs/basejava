@@ -26,6 +26,6 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     protected boolean isExisting(Object searchKey) {
-        return (Integer) searchKey >= 0;
+        return searchKey instanceof  Integer && (Integer) searchKey >= 0;
     }
 }
