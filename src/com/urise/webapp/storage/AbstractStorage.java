@@ -7,51 +7,39 @@ public abstract class AbstractStorage implements Storage {
 
     @Override
     public void update(Resume r) {
-        if (r == null) {
-            throw new IllegalArgumentException("Resume must not be null");
-        }
-        String uuid = r.getUuid();
-        if (!isExisting(uuid)) {
-            throw new NotExistStorageException(uuid);
-        }
+        getExistingSearchKey(r.getUuid());
         doUpdate(r);
     }
 
     @Override
     public void save(Resume r) {
-        if (r == null) {
-            throw new IllegalArgumentException("Resume must not be null");
-        }
-        String uuid = r.getUuid();
-        if (!isExisting(uuid)) {
-            throw new NotExistStorageException(uuid);
-        }
+        getExistingSearchKey(r.getUuid());
         doSave(r);
     }
 
     @Override
     public Resume get(String uuid) {
-        if (uuid == null) {
-            throw new IllegalArgumentException("Resume must not be null");
-        }
-        if (!isExisting(uuid)) {
-            throw new NotExistStorageException(uuid);
-        }
-        return doGet(uuid);
+        return getExistingSearchKey(uuid);
     }
 
     @Override
     public void delete(String uuid) {
-        if (uuid == null) {
-            throw new IllegalArgumentException("Resume must not be null");
-        }
-        if (!isExisting(uuid)) {
-            throw new NotExistStorageException(uuid);
-        }
+        getExistingSearchKey(uuid);
         doDelete(uuid);
     }
 
-    protected abstract boolean  isExisting(Object searchKey);
+    protected Resume getExistingSearchKey(String uuid) {
+        if (uuid == null) {
+            throw new IllegalArgumentException("Resume must not be null");
+        }
+        Resume r = doGet(uuid);
+        if (r == null) {
+            throw new NotExistStorageException(uuid);
+        }
+        return r;
+    }
+
+    protected abstract boolean isExisting(Object searchKey);
 
     protected abstract void doUpdate(Resume r);
 
