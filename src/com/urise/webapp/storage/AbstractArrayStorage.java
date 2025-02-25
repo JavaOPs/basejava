@@ -23,11 +23,11 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
 
     public final void doUpdate(Resume r) {
-        int index = findIndex(r.getUuid());
-        if (index < 0) {
+        Object searchKey= getSearchKey(r.getUuid());
+        if (!isExisting(searchKey)) {
             throw new NotExistStorageException(r.getUuid());
         }
-        storage[index] = r;
+        storage[(Integer)searchKey] = r;
         System.out.println("\nElement " + r + " successfully update");
     }
 
@@ -36,8 +36,8 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     public void doSave(Resume r) {
-        int index = findIndex(r.getUuid());
-        if (index >= 0) {
+        Object searchKey = getSearchKey(r.getUuid());
+        if (isExisting(searchKey)) {
             throw new ExistStorageException(r.getUuid());
         } else if (size == STORAGE_LIMIT) {
             throw new StorageException("Storage overflow", r.getUuid());
@@ -48,27 +48,24 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     public final Resume doGet(String uuid) {
-        int index = findIndex(uuid);
-        if (index < 0) {
+        Object searchKey = getSearchKey(uuid);
+        if (!isExisting(searchKey)) {
             throw new NotExistStorageException(uuid);
         }
-        return storage[index];
+        return storage[(Integer) searchKey];
     }
 
     public final void doDelete(String uuid) {
-        int index = findIndex(uuid);
-        if (index < 0) {
+        Object searchKey = getSearchKey(uuid);
+        if (!isExisting(searchKey)) {
             throw new NotExistStorageException(uuid);
         }
-        fillDeletedElement(index);
+        fillDeletedElement((Integer)searchKey);
         storage[size - 1] = null;
         size--;
         System.out.println("\nElement " + uuid + " successfully deleted from storage");
     }
 
-    protected boolean exist(String uuid) {
-        return findIndex(uuid) >= 0;
-    }
 
     public Resume[] getAll() {
         return Arrays.copyOf(storage, size);
@@ -78,10 +75,11 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         return size;
     }
 
-    protected abstract int findIndex(String uuid);
-
     protected abstract void insertResume(Resume r);
 
     protected abstract void fillDeletedElement(int index);
 
+    protected abstract Object getSearchKey(String uuid);
+
+    protected abstract boolean isExisting(Object searchKey);
 }
