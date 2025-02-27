@@ -1,6 +1,5 @@
 package com.urise.webapp.storage;
 
-import com.urise.webapp.exception.ExistStorageException;
 import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.model.Resume;
 import org.junit.Assert;
@@ -10,8 +9,9 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
-public class ListStorageTest {
-    private ListStorage listStorage;
+public class MapStorageTest {
+
+    private MapStorage mapStorage;
 
     private static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";
@@ -36,41 +36,41 @@ public class ListStorageTest {
 
     @Before
     public void setUp() {
-        listStorage = new ListStorage();
-        listStorage.clear();
-        listStorage.save(RESUME_1);
-        listStorage.save(RESUME_2);
-        listStorage.save(RESUME_3);
+        mapStorage = new MapStorage();
+        mapStorage.clear();
+        mapStorage.save(RESUME_1);
+        mapStorage.save(RESUME_2);
+        mapStorage.save(RESUME_3);
     }
 
     @Test
     public void clear() {
-        listStorage.clear();
+        mapStorage.clear();
         assertSize(0);
-        Assert.assertArrayEquals(new Resume[0], listStorage.getAll());
+        Assert.assertArrayEquals(new Resume[0], mapStorage.getAll());
     }
 
     @Test
     public void update() {
-        listStorage.update(RESUME_2);
-        Assert.assertSame(RESUME_2, listStorage.get(UUID_2));
+        mapStorage.update(RESUME_2);
+        Assert.assertSame(RESUME_2, mapStorage.get(UUID_2));
     }
 
     @Test(expected = NotExistStorageException.class)
     public void updateNotExist() {
-        listStorage.update(UUID_NOT_EXIST);
+        mapStorage.update(UUID_NOT_EXIST);
     }
 
     @Test
     public void save() {
-        listStorage.save(SAVE_RESUME);
+        mapStorage.save(SAVE_RESUME);
         assertGet(SAVE_RESUME);
         assertSize(size + 1);
     }
 
     @Test
     public void saveExist() {
-        assertThrows(ExistStorageException.class, () -> listStorage.save(RESUME_1));
+        assertThrows(IllegalArgumentException.class, () -> mapStorage.save(RESUME_1));
     }
 
     @Test
@@ -79,33 +79,31 @@ public class ListStorageTest {
     }
 
     private void assertGet(Resume resume) {
-        assertEquals(resume, listStorage.get(resume.getUuid()));
+        assertEquals(resume, mapStorage.get(resume.getUuid()));
     }
 
     @Test(expected = NotExistStorageException.class)
     public void getNotExist() {
-        listStorage.get(UUID_NOT_EXIST.getUuid());
+        mapStorage.get(UUID_NOT_EXIST.getUuid());
     }
 
     @Test
     public void delete() {
-        listStorage.delete(UUID_2);
+        mapStorage.delete(UUID_2);
         assertSize(size - 1);
-        assertThrows(NotExistStorageException.class, () -> listStorage.get(UUID_2));
+        assertThrows(NotExistStorageException.class, () -> mapStorage.get(UUID_2));
     }
 
     @Test
     public void deleteNotExist() {
-        assertThrows(NotExistStorageException.class, () -> listStorage.delete(UUID_NOT_EXIST.getUuid()));
+        assertThrows(NotExistStorageException.class, () -> mapStorage.delete(UUID_NOT_EXIST.getUuid()));
     }
 
     @Test
     public void getAll() {
-        Resume[] array = listStorage.getAll();
+        Resume[] array = mapStorage.getAll();
         assertEquals(size, array.length);
-        assertEquals(RESUME_1, array[0]);
-        assertEquals(RESUME_2, array[1]);
-        assertEquals(RESUME_3, array[2]);
+        Assert.assertArrayEquals(new Resume[]{RESUME_1, RESUME_2, RESUME_3}, array);
     }
 
     @Test
@@ -114,7 +112,7 @@ public class ListStorageTest {
     }
 
     private void assertSize(int expectedSize) {
-        assertEquals(expectedSize, listStorage.size());
+        assertEquals(expectedSize, mapStorage.size());
     }
-}
 
+}
