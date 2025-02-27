@@ -66,7 +66,7 @@
 
 ![Screenshot_5](https://user-images.githubusercontent.com/29703461/199550057-fce7cf3c-7040-422f-b490-7b85b47ae952.png)
 
-- Реализуйте методы `save, get, delete, clear, getAll, size` в классе `ArrayStorage`, организовав хранение резюме в массиве 
+- Реализуйте методы `save, get, delete, clear, getAll, size` в классе `com.urise.webapp.storage.ArrayStorage`, организовав хранение резюме в массиве 
 - Храните все резюме в начале `storage` (без пустот в виде `null`), чтобы не перебирать каждый раз все 10_000 элементов
 - При реализации метода `delete` учитывайте, что после удаления резюме между оставшимися резюме не должно быть пустых ячеек, заполненных null
 ```
@@ -76,7 +76,7 @@ r1, r2, r3,..., rn, null, null,..., null
 <----- size ----->
 <------- storage.length (10000) ------->
 ```
-- Проверьте вашу реализацию с помощью классов `MainArray.main()` и `MainTestArrayStorage.main()`
+- Проверьте вашу реализацию с помощью классов `com.urise.webapp.MainArray.main()` и `com.urise.webapp.MainTestArrayStorage.main()`
 - Изучите дополнительные материалы по IntelliJ IDEA:
   - [Idea Wiki](https://github.com/JavaOPs/topjava/wiki/IDEA) 
   - [Отладка Java кода в IDEA. Основные возможности отладчика](https://youtu.be/Z1BQsf0A4xY)
@@ -95,11 +95,11 @@ r1, r2, r3,..., rn, null, null,..., null
 1. Перед каждым коммитом не забывайте пользоваться сочетанием клавиш `Ctrl + Alt + L` (автоматическое форматирование кода)
 1. Удаляйте в классах неиспользуемые импорты (`Ctrl + Alt + O`)
 1. Не игнорируй подсказки IDEA (подсвечивает)
-1. В методе `clear()` обнуление массива предполагает обнуление (null) ячеек, где хранятся Resume, а не создание нового или присваивание ему null
+1. В методе `clear()` обнуление массива предполагает обнуление (null) ячеек, где хранятся com.urise.webapp.model.Resume, а не создание нового или присваивание ему null
 1. При реализации методов не используйте коллекции
-1. Не меняйте сигнатуры методов в `ArrayStorage`
-1. Не добавляйте в `Resume` новые поля
-1. Resume r — давайте переменным осмысленные имена, например resume. r допустимо в коротких циклах и лямбда-выражениях
+1. Не меняйте сигнатуры методов в `com.urise.webapp.storage.ArrayStorage`
+1. Не добавляйте в `com.urise.webapp.model.Resume` новые поля
+1. com.urise.webapp.model.Resume r — давайте переменным осмысленные имена, например resume. r допустимо в коротких циклах и лямбда-выражениях
 
 ## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png)  5. [Вебинар "Быть программистом: от детства к зрелости"](https://www.youtube.com/watch?v=D5Hej0TyLaU)
   - [Слайды вебинара](https://docs.google.com/presentation/d/1YwtCCZsaGMdl-V15kTDHiJxiS52IAl-qqheNPpiNr54/)
